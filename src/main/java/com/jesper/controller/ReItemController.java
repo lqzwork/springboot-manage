@@ -5,17 +5,20 @@ import com.jesper.mapper.ReItemMapper;
 import com.jesper.model.Item;
 import com.jesper.model.ReItem;
 import com.jesper.model.ResObject;
+import com.jesper.model.User;
 import com.jesper.util.Constant;
 import com.jesper.util.DateUtil;
 import com.jesper.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -56,13 +59,16 @@ public class ReItemController {
 
     @ResponseBody
     @PostMapping("/user/reItemEditState")
-    public ResObject<Object> reItemEditState(ReItem reItem) {
+    @Transactional
+    public ResObject<Object> reItemEditState(ReItem reItem, HttpSession httpSession) {
         ReItem reItem1 = reItemMapper.selectByPrimaryKey(reItem.getId());
         Item item = new Item();
         item.setId(reItem1.getId());
         item.setBarcode(reItem1.getBarcode());
         item.setCid(reItem1.getCid());
         item.setImage(reItem1.getImage());
+        item.setNorm(reItem1.getNorm());
+        item.setUnit(reItem1.getUnit());
         item.setPrice(reItem1.getPrice());
         item.setNum(reItem1.getNum());
         item.setSellPoint(reItem1.getSellPoint());
@@ -70,6 +76,9 @@ public class ReItemController {
         item.setTitle(reItem1.getTitle());
         item.setCreated(new Date());
         item.setUpdated(new Date());
+        item.setCreateUserId(reItem1.getCreateUserId() + "");
+        User user = (User) httpSession.getAttribute("user");
+        item.setUpdteUserId(user.getId() + "");
         itemMapper.insert(item);
         reItemMapper.deleteByPrimaryKey(reItem.getId());
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
@@ -78,6 +87,7 @@ public class ReItemController {
 
     @ResponseBody
     @PostMapping("/user/deleteItemEditState")
+    @Transactional
     public ResObject<Object> deleteItemEditState(ReItem reItem) {
         reItemMapper.deleteByPrimaryKey(reItem.getId());
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);

@@ -9,6 +9,8 @@ public class ReItem extends BaseObject{
     private int id;
     private String title;
     private String sellPoint;
+    private String norm;
+    private String unit;
     private int price;
     private int num;
     private String barcode;
@@ -17,4 +19,6 @@ public class ReItem extends BaseObject{
     private int status;
     private Date recovered;
     private String recoveredStr;
+    private String createUserId;
+    private String updteUserId;
 }

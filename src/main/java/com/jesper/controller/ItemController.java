@@ -3,16 +3,14 @@ package com.jesper.controller;
 import com.jesper.mapper.ItemCategoryMapper;
 import com.jesper.mapper.ItemMapper;
 import com.jesper.mapper.ReItemMapper;
-import com.jesper.model.Item;
-import com.jesper.model.ItemCategory;
-import com.jesper.model.ReItem;
-import com.jesper.model.ResObject;
+import com.jesper.model.*;
 import com.jesper.util.*;
 import com.mongodb.gridfs.GridFSDBFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -123,6 +121,7 @@ public class ItemController {
     String imageName = null;
 
     @GetMapping("/user/itemEdit")
+    @Transactional
     public String itemEditGet(Model model, Item item) {
         ItemCategory itemCategory = new ItemCategory();
         itemCategory.setStart(0);
@@ -151,49 +150,20 @@ public class ItemController {
     }
 
     @PostMapping("/user/itemEdit")
-    public String itemEditPost(Model model, HttpServletRequest request, @RequestParam("file") MultipartFile file, Item item, HttpSession httpSession) {
+    @Transactional
+    public String itemEditPost(Model model, HttpServletRequest request, Item item, HttpSession httpSession) {
         //根据时间和随机数生成id
         Date date = new Date();
         item.setCreated(date);
         item.setUpdated(date);
         item.setBarcode("");
         item.setImage("");
-        int rannum = 0;
-        if (file.isEmpty()) {
-            System.out.println("图片未上传");
-        } else {
-            try {
-                Path path = Paths.get(ROOT, file.getOriginalFilename());
-                File tempFile = new File(path.toString());
-                if (!tempFile.exists()) {
-                    Files.copy(file.getInputStream(), path);
-                }
-                LinkedHashMap<String, Object> metaMap = new LinkedHashMap<String, Object>();
-                String id = null;
-                if (item.getId() != 0) {
-                    id = String.valueOf(item.getId());
-                } else {
-                    Random random = new Random();
-                    rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 1000;// 获取5位随机数
-                    id = String.valueOf(rannum);
-                }
-                metaMap.put("contentType", "jpg");
-                metaMap.put("_id", id);
-                mongoUtil.uploadFile(tempFile, id, metaMap);
-                tempFile.delete();
-                getFile.delete();
-                item.setImage(path.toString());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            System.out.println("get File by Id Success");
-        }
-
+        User user = (User) httpSession.getAttribute("user");
+        item.setUpdteUserId(user.getId() + "");
         if (item.getId() != 0) {
             itemMapper.update(item);
         } else {
-
-            item.setId(rannum);
+            item.setCreateUserId(user.getId() + "");
             itemMapper.insert(item);
         }
         return "redirect:itemManage_0_0_0";
@@ -211,19 +181,25 @@ public class ItemController {
 
     @ResponseBody
     @PostMapping("/user/itemEditState")
-    public ResObject<Object> itemEditState(Item item1) {
+    @Transactional
+    public ResObject<Object> itemEditState(Item item1, HttpSession httpSession) {
         Item item = itemMapper.findById(item1);
         ReItem reItem = new ReItem();
         reItem.setId(item.getId());
         reItem.setBarcode(item.getBarcode());
         reItem.setCid(item.getCid());
         reItem.setImage(item.getImage());
+        reItem.setNorm(item.getNorm());
+        reItem.setUnit(item.getUnit());
         reItem.setPrice(item.getPrice());
         reItem.setNum(item.getNum());
         reItem.setSellPoint(item.getSellPoint());
         reItem.setStatus(item.getStatus());
         reItem.setTitle(item.getTitle());
         reItem.setRecovered(new Date());
+        reItem.setCreateUserId(item.getCreateUserId());
+        User user = (User) httpSession.getAttribute("user");
+        reItem.setUpdteUserId(user.getId() + "");
         reItemMapper.insert(reItem);
         itemMapper.delete(item1);
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
@@ -232,6 +208,7 @@ public class ItemController {
     
     @ResponseBody
     @PostMapping("/user/itemEditNum")
+    @Transactional
     public ResObject<Object> itemEditNum(Item item1) {
         int update = itemMapper.updateNum(item1);
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);

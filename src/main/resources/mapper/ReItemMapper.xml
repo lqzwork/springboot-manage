@@ -5,6 +5,8 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="sell_point" property="sellPoint" jdbcType="VARCHAR"/>
+        <result column="norm" property="norm" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
         <result column="price" property="price" jdbcType="INTEGER"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="barcode" property="barcode" jdbcType="VARCHAR"/>
@@ -12,41 +14,58 @@
         <result column="cid" property="cid" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
         <result column="recovered" jdbcType="TIMESTAMP" property="recovered"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="updte_user_id" property="updteUserId" jdbcType="VARCHAR"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_re_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="com.jesper.model.ReItem">
-    insert into tb_re_item (id, title, sell_point,
-      price, num, barcode, 
-      image, cid, status, 
-      recovered)
-    values ( #{id, jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR},
-      #{price,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR},
-      #{image,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT},
-      #{recovered,jdbcType=TIMESTAMP})
+    insert into tb_re_item
+    (
+        id, title, sell_point, norm,
+        unit, price, num, barcode,
+        image, cid, status, recovered,
+        create_user_id,updte_user_id
+    )
+    values
+    (
+        #{id, jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR},
+        #{norm,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+        #{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR},
+        #{cid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{recovered,jdbcType=TIMESTAMP},
+        #{createUserId,jdbcType=VARCHAR},#{updteUserId,jdbcType=VARCHAR}
+    )
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.jesper.model.ReItem">
     update tb_re_item
     set title = #{title,jdbcType=VARCHAR},
       sell_point = #{sellPoint,jdbcType=VARCHAR},
+      norm = #{norm,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
       price = #{price,jdbcType=INTEGER},
       num = #{num,jdbcType=INTEGER},
       barcode = #{barcode,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       cid = #{cid,jdbcType=INTEGER},
       status = #{status,jdbcType=TINYINT},
-      recovered = #{recovered,jdbcType=TIMESTAMP}
+      recovered = #{recovered,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      updte_user_id = #{updteUserId,jdbcType=VARCHAR}}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, title, sell_point, price, num, barcode, image, cid, status, recovered
+    select
+        id, title, sell_point,norm,unit, price, num, barcode,
+        image, cid, status, recovered,create_user_id,updte_user_id
     from tb_re_item
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
-    select id, title, sell_point, price, num, barcode, image, cid, status, recovered
+    select
+        id, title, sell_point,norm,unit, price, num, barcode,
+        image, cid, status, recovered, create_user_id,updte_user_id
     from tb_re_item ORDER BY recovered DESC
   </select>
 
