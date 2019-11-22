@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jesper.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.Order">
+<mapper namespace="com.baixin.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.Order">
         <id column="order_id" jdbcType="VARCHAR" property="orderId"/>
         <result column="payment" jdbcType="VARCHAR" property="payment"/>
         <result column="payment_type" jdbcType="INTEGER" property="paymentType"/>
@@ -27,7 +27,7 @@
         delete from tb_order
         where order_id = #{orderId,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.jesper.model.Order">
+    <insert id="insert" parameterType="com.baixin.model.Order">
         insert into tb_order (order_id, payment, payment_type,
         post_fee, status, create_time,
         update_time, payment_time, consign_time,
@@ -41,7 +41,7 @@
         #{shippingCode,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{buyerMessage,jdbcType=VARCHAR},
         #{buyerNick,jdbcType=VARCHAR}, #{buyerRate,jdbcType=INTEGER})
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.jesper.model.Order">
+    <update id="updateByPrimaryKey" parameterType="com.baixin.model.Order">
         update tb_order
         set refundStatus = #{refundStatus,jdbcType=INTEGER}
         where order_id = #{orderId,jdbcType=VARCHAR}
@@ -60,7 +60,7 @@
         from tb_order
     </select>
 
-    <select id="list" parameterType="com.jesper.model.Order" resultMap="BaseResultMap">
+    <select id="list" parameterType="com.baixin.model.Order" resultMap="BaseResultMap">
         select order_id, payment, payment_type, post_fee, status, create_time, update_time,
         payment_time, consign_time, end_time, close_time, shipping_name, shipping_code, user_id,
         buyer_message, buyer_nick, buyer_rate
@@ -78,7 +78,7 @@
         limit #{start, jdbcType=INTEGER},#{end, jdbcType=INTEGER}
     </select>
 
-    <select id="listRefund" parameterType="com.jesper.model.Order" resultMap="BaseResultMap">
+    <select id="listRefund" parameterType="com.baixin.model.Order" resultMap="BaseResultMap">
         select order_id, payment, payment_type, post_fee, status, create_time, update_time,
         payment_time, consign_time, end_time, close_time, shipping_name, shipping_code, user_id,
         buyer_message, buyer_nick, buyer_rate, refundStatus, refundReason, isRefund
@@ -125,17 +125,17 @@
         AND  refundStatus = 3
     </select>
 
-    <select id="selectDayOrderNum" parameterType="com.jesper.model.Order" resultType="java.lang.Integer">
+    <select id="selectDayOrderNum" parameterType="com.baixin.model.Order" resultType="java.lang.Integer">
         SELECT count(*) FROM tb_order
         WHERE create_time BETWEEN  #{createTime, jdbcType=DATE} AND  date_add(#{createTime, jdbcType=DATE}, interval 1 day)
     </select>
 
-    <select id="selectDayOrderSum" parameterType="com.jesper.model.Order" resultType="java.lang.Integer">
+    <select id="selectDayOrderSum" parameterType="com.baixin.model.Order" resultType="java.lang.Integer">
         SELECT sum(payment) FROM tb_order
         WHERE create_time BETWEEN  #{createTime, jdbcType=DATE} AND  date_add(#{createTime, jdbcType=DATE}, interval 1 day)
     </select>
 
-    <resultMap id="monthMap" type="com.jesper.model.Month">
+    <resultMap id="monthMap" type="com.baixin.model.Month">
 
         <result column="一月份" jdbcType="INTEGER" property="Jan"/>
         <result column="二月份" jdbcType="INTEGER" property="Feb"/>

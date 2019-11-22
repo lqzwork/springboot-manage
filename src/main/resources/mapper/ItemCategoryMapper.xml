@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jesper.mapper.ItemCategoryMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.ItemCategory">
+<mapper namespace="com.baixin.mapper.ItemCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.ItemCategory">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -36,7 +36,7 @@
     </select>
 
 
-    <insert id="insert" parameterType="com.jesper.model.ItemCategory" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.baixin.model.ItemCategory" useGeneratedKeys="true" keyProperty="id">
            INSERT INTO tb_category (id, parent_id, name, status, sort_order, is_parent, created, updated)
            value ( #{id, jdbcType=INTEGER},
             null,
@@ -49,14 +49,14 @@
            )
     </insert>
 
-    <update id="update" parameterType="com.jesper.model.ItemCategory">
+    <update id="update" parameterType="com.baixin.model.ItemCategory">
            UPDATE tb_category SET
            name = #{name, jdbcType=VARCHAR},
            updated = now()
             WHERE  id =  #{id, jdbcType=INTEGER}
     </update>
 
-    <update id="updateStatus" parameterType="com.jesper.model.ItemCategory">
+    <update id="updateStatus" parameterType="com.baixin.model.ItemCategory">
          UPDATE tb_category SET
           status = #{status, jdbcType=INTEGER},
           updated = now()

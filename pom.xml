@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jesper</groupId>
-    <artifactId>jesper</artifactId>
+    <groupId>com.baixin</groupId>
+    <artifactId>baixin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <!-- <packaging>war</packaging>  -->
     <packaging>jar</packaging>
 
-    <name>jesper</name>
-    <description>jesper</description>
+    <name>baixin</name>
+    <description>baixin</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

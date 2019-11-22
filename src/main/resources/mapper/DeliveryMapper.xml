@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jesper.mapper.DeliveryMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.Delivery">
+<mapper namespace="com.baixin.mapper.DeliveryMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.Delivery">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="delivery_name" property="deliveryName" jdbcType="VARCHAR"/>
         <result column="delivery_code" property="deliveryCode" jdbcType="VARCHAR"/>
@@ -19,14 +19,14 @@
   </delete>
 
 
-    <insert id="insert" parameterType="com.jesper.model.Delivery">
+    <insert id="insert" parameterType="com.baixin.model.Delivery">
     insert into kuaidi100_delivery ( delivery_name, delivery_code,
       delivery_sort)
     values ( #{deliveryName,jdbcType=VARCHAR}, #{deliveryCode,jdbcType=VARCHAR},
       #{deliverySort,jdbcType=VARCHAR})
   </insert>
 
-    <update id="updateByPrimaryKey" parameterType="com.jesper.model.Delivery">
+    <update id="updateByPrimaryKey" parameterType="com.baixin.model.Delivery">
     update kuaidi100_delivery
     set delivery_name = #{deliveryName,jdbcType=VARCHAR},
       delivery_code = #{deliveryCode,jdbcType=VARCHAR},

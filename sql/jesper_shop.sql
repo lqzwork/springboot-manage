@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50720
 Source Host           : localhost:3306
-Source Database       : jesper
+Source Database       : baixin
 
 Target Server Type    : MYSQL
 Target Server Version : 50720
@@ -938,7 +938,7 @@ CREATE TABLE `tb_user` (
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES ('6', 'admin', 'admin', '小花', '运营岗', '1818181818', null, '2018-03-19', '2018-03-19', '1');
-INSERT INTO `tb_user` VALUES ('7', 'jesper', 'jesper', '111111aaa', '111', '1773232392@qq.com', null, '2018-03-30', '2018-04-04', '1');
+INSERT INTO `tb_user` VALUES ('7', 'baixin', 'baixin', '111111aaa', '111', '1773232392@qq.com', null, '2018-03-30', '2018-04-04', '1');
 
 
 -- ----------------------------

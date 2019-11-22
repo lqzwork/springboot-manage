@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jesper.mapper.ReItemMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.ReItem">
+<mapper namespace="com.baixin.mapper.ReItemMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.ReItem">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="sell_point" property="sellPoint" jdbcType="VARCHAR"/>
@@ -21,7 +21,7 @@
     delete from tb_re_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.jesper.model.ReItem">
+    <insert id="insert" parameterType="com.baixin.model.ReItem">
     insert into tb_re_item
     (
         id, title, sell_point, norm,
@@ -38,7 +38,7 @@
         #{createUserId,jdbcType=VARCHAR},#{updteUserId,jdbcType=VARCHAR}
     )
   </insert>
-    <update id="updateByPrimaryKey" parameterType="com.jesper.model.ReItem">
+    <update id="updateByPrimaryKey" parameterType="com.baixin.model.ReItem">
     update tb_re_item
     set title = #{title,jdbcType=VARCHAR},
       sell_point = #{sellPoint,jdbcType=VARCHAR},
@@ -70,7 +70,7 @@
   </select>
 
 
-    <select id="count" resultType="java.lang.Integer" parameterType="com.jesper.model.ReItem">
+    <select id="count" resultType="java.lang.Integer" parameterType="com.baixin.model.ReItem">
     SELECT count(*) from tb_re_item
   </select>
 </mapper>

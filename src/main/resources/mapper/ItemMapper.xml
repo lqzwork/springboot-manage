@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jesper.mapper.ItemMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.Item">
+<mapper namespace="com.baixin.mapper.ItemMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.Item">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="sell_point" property="sellPoint" jdbcType="VARCHAR"/>
@@ -29,7 +29,7 @@
         SELECT * from tb_item
     </select>
 
-    <select id="list" resultMap="BaseResultMap" parameterType="com.jesper.model.Item">
+    <select id="list" resultMap="BaseResultMap" parameterType="com.baixin.model.Item">
         SELECT i.* , t.name as categoryName FROM tb_item i LEFT JOIN tb_category t ON i.cid = t.id WHERE i.status = 1
         <if test="title != null">
             AND title LIKE concat('%', #{title, jdbcType=VARCHAR}, '%')
@@ -44,7 +44,7 @@
         limit #{start, jdbcType=INTEGER},#{end, jdbcType=INTEGER}
     </select>
 
-    <select id="listS" resultMap="BaseResultMap" parameterType="com.jesper.model.Item">
+    <select id="listS" resultMap="BaseResultMap" parameterType="com.baixin.model.Item">
         SELECT i.* , t.name as categoryName FROM tb_item i LEFT JOIN tb_category t ON i.cid = t.id WHERE i.status = 1
         <if test="title != null">
             AND title LIKE concat('%', #{title, jdbcType=VARCHAR}, '%')
@@ -59,7 +59,7 @@
         limit #{start, jdbcType=INTEGER},#{end, jdbcType=INTEGER}
     </select>
 
-    <select id="count" resultType="java.lang.Integer" parameterType="com.jesper.model.Item">
+    <select id="count" resultType="java.lang.Integer" parameterType="com.baixin.model.Item">
         SELECT count(*) from tb_item i LEFT JOIN tb_category t ON i.cid = t.id WHERE i.status = 1
         <if test="title != null">
             AND title LIKE concat('%', #{title, jdbcType=VARCHAR}, '%')
@@ -73,7 +73,7 @@
             ORDER BY price
         </if>
     </select>
-    <insert id="insert" parameterType="com.jesper.model.Item" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.baixin.model.Item" useGeneratedKeys="true" keyProperty="id">
          INSERT INTO tb_item (title, sell_point,norm,unit, price, num, barcode, image, cid, status,create_user_id, created,updte_user_id, updated)
          VALUE (
          #{title, jdbcType=VARCHAR},
@@ -93,7 +93,7 @@
           )
     </insert>
 
-    <update id="update" parameterType="com.jesper.model.Item">
+    <update id="update" parameterType="com.baixin.model.Item">
         UPDATE tb_item SET
         <if test="title != null">
             title = #{title, jdbcType=VARCHAR},
@@ -129,10 +129,10 @@
     </update>
 
     <!-- 更新库存 -->
-    <update id="updateNum" parameterType="com.jesper.model.Item">
+    <update id="updateNum" parameterType="com.baixin.model.Item">
         UPDATE tb_item SET num = num + #{num} WHERE id = #{id}
     </update>
-    <delete id="delete" parameterType="com.jesper.model.Item">
+    <delete id="delete" parameterType="com.baixin.model.Item">
         DELETE FROM tb_item WHERE id = #{id, jdbcType=INTEGER}
     </delete>
 </mapper>

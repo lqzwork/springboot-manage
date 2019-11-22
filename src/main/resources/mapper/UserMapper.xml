@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jesper.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.jesper.model.User">
+<mapper namespace="com.baixin.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
@@ -22,16 +22,16 @@
         SELECT 1 from tb_user  where userName = #{userName, jdbcType=VARCHAR}
     </select>
 
-    <select id="selectPasswordByName" resultType="java.lang.String" parameterType="com.jesper.model.User">
+    <select id="selectPasswordByName" resultType="java.lang.String" parameterType="com.baixin.model.User">
         SELECT password from tb_user  where userName = #{userName, jdbcType=VARCHAR} AND  email = #{email, jdbcType=VARCHAR}
     </select>
 
-    <insert id="insert" parameterType="com.jesper.model.User">
+    <insert id="insert" parameterType="com.baixin.model.User">
         INSERT INTO tb_user (id, userName, password, realName, business, email, headPicture, addDate, updateDate, state)
         VALUES   (null, #{userName, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, null, null, #{email, jdbcType=VARCHAR}, null, #{addDate, jdbcType=DATE}, #{updateDate, jdbcType=DATE}, 1)
     </insert>
 
-    <update id="update" parameterType="com.jesper.model.User">
+    <update id="update" parameterType="com.baixin.model.User">
         UPDATE tb_user SET
         password = #{password, jdbcType=VARCHAR},
         email = #{email, jdbcType=VARCHAR},
