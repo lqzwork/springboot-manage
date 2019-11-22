@@ -223,6 +223,10 @@
     function updateNum(id, state, commendState) {
         var deleteTag;
         var num = $("#" + id + "num").val();
+        if (0 == num) {
+            alert("药品操作数量异常");
+            return;
+        }
         if (state == 2) {
             deleteTag = confirm("确定更改该商品库存?");
         } else {

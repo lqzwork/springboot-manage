@@ -10,6 +10,18 @@
         <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <insert id = "insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO operate_log (item_id, modify_num,operate,operate_user_id, operate_time)
+         VALUE
+         (
+             #{itemId},
+             #{modifyNum},
+             #{operate},
+             #{operateUserId},
+             #{operateTime}
+          )
+    </insert>
+
     <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         SELECT * from tb_item where id = #{id, jdbcType=INTEGER}
     </select>

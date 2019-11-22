@@ -4,6 +4,7 @@ import com.baixin.mapper.ItemCategoryMapper;
 import com.baixin.mapper.ItemMapper;
 import com.baixin.mapper.ReItemMapper;
 import com.baixin.model.*;
+import com.baixin.service.OperateLogService;
 import com.baixin.util.*;
 import com.mongodb.gridfs.GridFSDBFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class ItemController {
 
     @Autowired
     private ReItemMapper reItemMapper;
+    
+    @Autowired
+    private OperateLogService operateLogService;
 
     public static final String ROOT = "src/main/resources/static/img/item/";
 
@@ -205,8 +209,16 @@ public class ItemController {
     @ResponseBody
     @PostMapping("/user/itemEditNum")
     @Transactional
-    public ResObject<Object> itemEditNum(Item item1) {
+    public ResObject<Object> itemEditNum(Item item1, HttpSession httpSession) {
         int update = itemMapper.updateNum(item1);
+        OperateLog operateLog = new OperateLog();
+        operateLog.setItemId(item1.getId() + "");
+        operateLog.setModifyNum(item1.getNum());
+        operateLog.setOperate(item1.getNum() > 0? "买入":"卖出");
+        User user = (User) httpSession.getAttribute("user");
+        operateLog.setOperateUserId(user.getId() + "");
+        operateLog.setOperateTime(new Date());
+        operateLogService.recordOperateLog(operateLog);
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
         return object;
     }

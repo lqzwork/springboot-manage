@@ -1,6 +1,6 @@
 package com.baixin.mapper;
 
-import com.baixin.model.Item;
+import com.baixin.model.OperateLog;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface OperateLogMapper {
-
-    Item findById(Item item);
+    
+    int insert(OperateLog operateLog);
 }
