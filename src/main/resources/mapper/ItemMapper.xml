@@ -5,13 +5,17 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="sell_point" property="sellPoint" jdbcType="VARCHAR"/>
+        <result column="norm" property="norm" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
         <result column="price" property="price" jdbcType="INTEGER"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="barcode" property="barcode" jdbcType="VARCHAR"/>
         <result column="image" property="image" jdbcType="VARCHAR"/>
         <result column="cid" property="cid" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
         <result column="created" property="created" jdbcType="TIMESTAMP"/>
+        <result column="updte_user_id" property="updteUserId" jdbcType="VARCHAR"/>
         <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
         <result column="categoryName" property="categoryName" jdbcType="VARCHAR"/>
     </resultMap>
@@ -70,17 +74,21 @@
         </if>
     </select>
     <insert id="insert" parameterType="com.jesper.model.Item" useGeneratedKeys="true" keyProperty="id">
-         INSERT INTO tb_item (title, sell_point, price, num, barcode, image, cid, status, created, updated)
+         INSERT INTO tb_item (title, sell_point,norm,unit, price, num, barcode, image, cid, status,create_user_id, created,updte_user_id, updated)
          VALUE (
          #{title, jdbcType=VARCHAR},
          #{sellPoint, jdbcType=VARCHAR},
+         #{norm, jdbcType=VARCHAR},
+         #{unit, jdbcType=VARCHAR},
          #{price, jdbcType=INTEGER},
          #{num, jdbcType=INTEGER},
          #{barcode, jdbcType=VARCHAR},
          #{image, jdbcType=VARCHAR},
          #{cid, jdbcType=INTEGER},
          1,
+         #{createUserId, jdbcType=VARCHAR},
          #{created, jdbcType=TIMESTAMP},
+         #{updteUserId, jdbcType=VARCHAR},
          #{updated, jdbcType=TIMESTAMP}
           )
     </insert>
@@ -93,6 +101,12 @@
         <if test="sellPoint != null">
             sell_point= #{sellPoint, jdbcType=VARCHAR},
         </if>
+        <if test="norm != null">
+            norm = #{norm, jdbcType=VARCHAR},
+        </if>
+        <if test="unit != null">
+            unit = #{unit, jdbcType=VARCHAR},
+        </if>
         <if test="price != null">
             price = #{price, jdbcType=INTEGER},
         </if>
@@ -101,6 +115,9 @@
         </if>
         <if test="cid != null">
             cid = #{cid, jdbcType=INTEGER},
+        </if>
+        <if test="updteUserId != null">
+            updte_user_id = #{updteUserId, jdbcType=VARCHAR},
         </if>
         <if test="updated != null">
             updated = #{updated, jdbcType=TIMESTAMP},
