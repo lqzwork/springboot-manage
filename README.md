@@ -1,4 +1,4 @@
-## 基于SpringBoot+Mybatis+Thymeleaf商品信息管理系统
+## 基于SpringBoot+Mybatis+Thymeleaf药品信息管理系统
 
 ### 主要用到的技术：
 - 使用maven进行项目构建 
@@ -18,8 +18,8 @@
 - **仪表盘管理模块**
 ：展示当前月收入及其环比（环比=（当前月收入 - 上个月收入）/ 上个月收入）、当前月订单数及其环比、网站访问量、当前月退单数及其环比、以条形图的形式(使用jquery插件）展示最近30天每天的收入和订单数
 
-- **商品管理模块**
-：商品增删改查、商品图片导入（存储在MongoDB）、导出商品报表、商品分类增删改查、库存查改，库存不足和积货提醒、商品回收和恢复。
+- **药品管理模块**
+：药品增删改查、药品图片导入（存储在MongoDB）、导出药品报表、药品分类增删改查、库存查改，库存不足和积货提醒、药品回收和恢复。
 
 - **订单管理模块**
 ：订单查询查看、订单退款管理（查看和审批）、发货管理、物流公司管理、快递跟踪（调用快递100接口）
@@ -36,9 +36,9 @@
 ## 预览效果
 ![首页](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/board.png)
 
-![商品管理](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/item.png)
+![药品管理](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/item.png)
 
-![商品修改](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/edit.png)
+![药品修改](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/edit.png)
 
 ![订单管理](https://github.com/zaiyunduan123/jesper_shop/blob/master/src/main/resources/static/img/shop-image/order.png)
 
@@ -94,22 +94,22 @@ CREATE TABLE `tb_category` (
 
 DROP TABLE IF EXISTS `tb_item`;
 CREATE TABLE `tb_item` (
-  `id` bigint(20) NOT NULL COMMENT '商品id，同时也是商品编号',
-  `title` varchar(100) NOT NULL COMMENT '商品标题',
-  `sell_point` varchar(500) DEFAULT NULL COMMENT '商品卖点',
-  `price` bigint(20) NOT NULL COMMENT '商品价格，单位为：分',
+  `id` bigint(20) NOT NULL COMMENT '药品id，同时也是药品编号',
+  `title` varchar(100) NOT NULL COMMENT '药品名称',
+  `sell_point` varchar(500) DEFAULT NULL COMMENT '药品卖点',
+  `price` bigint(20) NOT NULL COMMENT '药品价格，单位为：分',
   `num` int(10) NOT NULL COMMENT '库存数量',
-  `barcode` varchar(30) DEFAULT NULL COMMENT '商品条形码',
-  `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `barcode` varchar(30) DEFAULT NULL COMMENT '药品条形码',
+  `image` varchar(500) DEFAULT NULL COMMENT '药品图片',
   `cid` bigint(10) NOT NULL COMMENT '所属类目，叶子类目',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '药品状态，1-正常，2-下架，3-删除',
   `created` datetime NOT NULL COMMENT '创建时间',
   `updated` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`),
   KEY `status` (`status`),
   KEY `updated` (`updated`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='药品表';
 
 
 DROP TABLE IF EXISTS `tb_order`;
@@ -145,13 +145,13 @@ CREATE TABLE `tb_order` (
 DROP TABLE IF EXISTS `tb_order_item`;
 CREATE TABLE `tb_order_item` (
   `id` varchar(20) COLLATE utf8_bin NOT NULL,
-  `item_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '商品id',
+  `item_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '药品id',
   `order_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '订单id',
-  `num` int(10) DEFAULT NULL COMMENT '商品购买数量',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '商品标题',
-  `price` bigint(50) DEFAULT NULL COMMENT '商品单价',
-  `total_fee` bigint(50) DEFAULT NULL COMMENT '商品总金额',
-  `pic_path` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '商品图片地址',
+  `num` int(10) DEFAULT NULL COMMENT '药品购买数量',
+  `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '药品名称',
+  `price` bigint(50) DEFAULT NULL COMMENT '药品单价',
+  `total_fee` bigint(50) DEFAULT NULL COMMENT '药品总金额',
+  `pic_path` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '药品图片地址',
   PRIMARY KEY (`id`),
   KEY `item_id` (`item_id`) USING BTREE,
   KEY `order_id` (`order_id`) USING BTREE
@@ -177,18 +177,18 @@ CREATE TABLE `tb_order_shipping` (
 
 DROP TABLE IF EXISTS `tb_re_item`;
 CREATE TABLE `tb_re_item` (
-  `id` bigint(20) NOT NULL COMMENT '商品id，同时也是商品编号',
-  `title` varchar(100) NOT NULL COMMENT '商品标题',
-  `sell_point` varchar(500) DEFAULT NULL COMMENT '商品卖点',
-  `price` bigint(20) NOT NULL COMMENT '商品价格，单位为：分',
+  `id` bigint(20) NOT NULL COMMENT '药品id，同时也是药品编号',
+  `title` varchar(100) NOT NULL COMMENT '药品名称',
+  `sell_point` varchar(500) DEFAULT NULL COMMENT '药品卖点',
+  `price` bigint(20) NOT NULL COMMENT '药品价格，单位为：分',
   `num` int(10) NOT NULL COMMENT '库存数量',
-  `barcode` varchar(30) DEFAULT NULL COMMENT '商品条形码',
-  `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `barcode` varchar(30) DEFAULT NULL COMMENT '药品条形码',
+  `image` varchar(500) DEFAULT NULL COMMENT '药品图片',
   `cid` bigint(10) NOT NULL COMMENT '所属类目，叶子类目',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '药品状态，1-正常，2-下架，3-删除',
   `recovered` datetime NOT NULL COMMENT '回收时间',
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`),
   KEY `status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品回收表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='药品回收表';
 ```

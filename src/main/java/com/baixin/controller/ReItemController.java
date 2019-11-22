@@ -39,7 +39,7 @@ public class ReItemController {
                              @PathVariable Integer pageSize,
                              @PathVariable Integer pageCount,
                              Model model) {
-        if (pageSize == 0) pageSize = 50;
+        if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
         int rows = reItemMapper.selectAll().size();
         if (pageCount == 0) pageCount = rows % pageSize == 0 ? (rows / pageSize) : (rows / pageSize) + 1;

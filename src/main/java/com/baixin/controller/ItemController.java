@@ -28,7 +28,7 @@ import java.util.List;
 
 
 /**
- * 商品管理
+ * 药品管理
  */
 @Controller
 public class ItemController {
@@ -65,7 +65,7 @@ public class ItemController {
                              @PathVariable Integer pageSize,
                              @PathVariable Integer pageCount,
                              Model model) {
-        if (pageSize == 0) pageSize = 50;
+        if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
 
         int rows = itemMapper.count(item);
@@ -95,17 +95,17 @@ public class ItemController {
 
         //导出excel
         LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
-        fieldMap.put("id", "商品id");
-        fieldMap.put("title", "商品标题");
-        fieldMap.put("sellPoint", "商品卖点");
-        fieldMap.put("price", "商品价格");
+        fieldMap.put("id", "药品id");
+        fieldMap.put("title", "药品名称");
+        fieldMap.put("sellPoint", "药品卖点");
+        fieldMap.put("price", "药品价格");
         fieldMap.put("num", "库存数量");
-        fieldMap.put("image", "商品图片");
+        fieldMap.put("image", "药品图片");
         fieldMap.put("cid", "所属类目，叶子类目");
-        fieldMap.put("status", "商品状态，1-正常，2-下架，3-删除");
+        fieldMap.put("status", "药品状态，1-正常，2-下架，3-删除");
         fieldMap.put("created", "创建时间");
         fieldMap.put("updated", "更新时间");
-        String sheetName = "商品管理报表";
+        String sheetName = "药品管理报表";
         response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition", "attachment;filename=ItemManage.xls");//默认Excel名称
         response.flushBuffer();
@@ -210,6 +210,31 @@ public class ItemController {
     @PostMapping("/user/itemEditNum")
     @Transactional
     public ResObject<Object> itemEditNum(Item item1, HttpSession httpSession) {
+        int update = itemMapper.updateNum(item1);
+        OperateLog operateLog = new OperateLog();
+        operateLog.setItemId(item1.getId() + "");
+        operateLog.setModifyNum(item1.getNum());
+        operateLog.setOperate(item1.getNum() > 0? "买入":"卖出");
+        User user = (User) httpSession.getAttribute("user");
+        operateLog.setOperateUserId(user.getId() + "");
+        operateLog.setOperateTime(new Date());
+        operateLogService.recordOperateLog(operateLog);
+        ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
+        return object;
+    }
+    
+    /**
+     * @desc 获取操作日志
+     *
+     * @auther: liqz
+     * @param: [item1, httpSession]
+     * @return: com.baixin.model.ResObject<java.lang.Object>
+     * @date: 2019-11-22 17:05
+     *
+     */
+    @PostMapping("/user/itemOperateLogs")
+    @Transactional
+    public ResObject<Object> itemOperateLogs(Item item1, HttpSession httpSession) {
         int update = itemMapper.updateNum(item1);
         OperateLog operateLog = new OperateLog();
         operateLog.setItemId(item1.getId() + "");

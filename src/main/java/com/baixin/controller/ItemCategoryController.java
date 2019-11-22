@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 商品分类管理
+ * 药品分类管理
  */
 @Controller
 public class ItemCategoryController {

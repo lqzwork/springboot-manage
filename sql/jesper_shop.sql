@@ -218,22 +218,22 @@ INSERT INTO `tb_category` VALUES ('562', '558', '运营商', '1', '2', '1', '201
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_item`;
 CREATE TABLE `tb_item` (
-  `id` bigint(20) NOT NULL COMMENT '商品id，同时也是商品编号',
-  `title` varchar(100) NOT NULL COMMENT '商品标题',
-  `sell_point` varchar(500) DEFAULT NULL COMMENT '商品卖点',
-  `price` bigint(20) NOT NULL COMMENT '商品价格，单位为：分',
+  `id` bigint(20) NOT NULL COMMENT '药品id，同时也是药品编号',
+  `title` varchar(100) NOT NULL COMMENT '药品名称',
+  `sell_point` varchar(500) DEFAULT NULL COMMENT '药品卖点',
+  `price` bigint(20) NOT NULL COMMENT '药品价格，单位为：分',
   `num` int(10) NOT NULL COMMENT '库存数量',
-  `barcode` varchar(30) DEFAULT NULL COMMENT '商品条形码',
-  `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `barcode` varchar(30) DEFAULT NULL COMMENT '药品条形码',
+  `image` varchar(500) DEFAULT NULL COMMENT '药品图片',
   `cid` bigint(10) NOT NULL COMMENT '所属类目，叶子类目',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '药品状态，1-正常，2-下架，3-删除',
   `created` datetime NOT NULL COMMENT '创建时间',
   `updated` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`),
   KEY `status` (`status`),
   KEY `updated` (`updated`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='药品表';
 
 -- ----------------------------
 -- Records of tb_item
@@ -314,14 +314,14 @@ INSERT INTO `tb_item` VALUES ('1217540', '苹果（Apple）iPhone 6 Plus (A1524)
 INSERT INTO `tb_item` VALUES ('1217541', '苹果（Apple）iPhone 6 Plus (A1524) 128GB 银色 移动联通电信4G手机', '<a href=\'http://sale.jd.com/act/nAqiWgU34frQolt.html\' target=\'_blank\'>关注iPhone6.jd.com</a>', '738800', '99999', null, 'http://image.taotao.com/jd/bfb2bee9c43c4d958a5a3be34a3b423e.jpg', '560', '1', '2015-03-08 21:27:42', '2015-03-08 21:27:42');
 INSERT INTO `tb_item` VALUES ('1218356', '联想 黄金斗士S8 (S898t+) 16G 钛金灰 移动3G手机 双卡双待', '八核神器！超薄外观！超高好评！2GB RAM+16GB ROM！', '78900', '99999', null, 'http://image.taotao.com/jd/c4b21764f6f04522bedc82cbe92920ac.jpg', '560', '1', '2015-03-08 21:27:49', '2015-03-08 21:27:49');
 INSERT INTO `tb_item` VALUES ('1218872', 'TCL (P306C) 珍珠白 电信3G手机 双卡双待', '特价抢购！入门电信智能手机！5英寸大屏，高通双核1.2GHz处理器，Android 4.3操作系统！', '37900', '99999', null, 'http://image.taotao.com/jd/c747fe51bcd04cf1b3fc56ab5cf72d77.jpg', '560', '1', '2015-03-08 21:28:30', '2015-03-08 21:28:30');
-INSERT INTO `tb_item` VALUES ('1219033', '【移动购机赠费】苹果（APPLE）iPhone 6 (A1589) 16GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '498800', '99999', null, 'http://image.taotao.com/jd/817a2059417c44b28fd83f0c79a7cab7.jpg', '560', '1', '2015-03-08 21:27:42', '2015-03-08 21:27:42');
-INSERT INTO `tb_item` VALUES ('1219035', '【移动购机赠费】苹果（Apple）iPhone 6 (A1589) 128GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多商品速度围观，快来点我，点我</a>', '647700', '99999', null, 'http://image.taotao.com/jd/b6ef0a326bcb4ea29b1d0481ba052a81.jpg', '560', '1', '2015-03-08 21:33:18', '2015-03-08 21:33:18');
-INSERT INTO `tb_item` VALUES ('1219039', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 深空灰色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/77693cb2dfcf4456b956bbfb3ec2cb10.jpg', '560', '1', '2015-03-08 21:28:16', '2015-03-08 21:28:16');
-INSERT INTO `tb_item` VALUES ('1219042', '【移动购机赠费】苹果（APPLE）iPhone 6 (A1589) 64GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/145465ba538e4d16878fbe6c17658b9c.jpg', '560', '1', '2015-03-08 21:27:42', '2015-03-08 21:27:42');
-INSERT INTO `tb_item` VALUES ('1219043', '【移动购机赠费】苹果（Apple）iPhone 6 (A1589) 64GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/13327061d6274795aaa5a424bab5b8cf.jpg', '560', '1', '2015-03-08 21:27:49', '2015-03-08 21:27:49');
-INSERT INTO `tb_item` VALUES ('1219045', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/143dd69bf1c04ad7b15c1e8d878ec231.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
-INSERT INTO `tb_item` VALUES ('1219046', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多商品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/f58d499a7a6c4f3fa3943bf954c8d6a3.jpg', '560', '1', '2015-03-08 21:28:01', '2015-03-08 21:28:01');
-INSERT INTO `tb_item` VALUES ('1219053', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 64GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多商品速度围观，快来点我，点我</a>', '668800', '99999', null, 'http://image.taotao.com/jd/9913f6df14924ee4b03377c4becedf4f.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
+INSERT INTO `tb_item` VALUES ('1219033', '【移动购机赠费】苹果（APPLE）iPhone 6 (A1589) 16GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '498800', '99999', null, 'http://image.taotao.com/jd/817a2059417c44b28fd83f0c79a7cab7.jpg', '560', '1', '2015-03-08 21:27:42', '2015-03-08 21:27:42');
+INSERT INTO `tb_item` VALUES ('1219035', '【移动购机赠费】苹果（Apple）iPhone 6 (A1589) 128GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多药品速度围观，快来点我，点我</a>', '647700', '99999', null, 'http://image.taotao.com/jd/b6ef0a326bcb4ea29b1d0481ba052a81.jpg', '560', '1', '2015-03-08 21:33:18', '2015-03-08 21:33:18');
+INSERT INTO `tb_item` VALUES ('1219039', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 深空灰色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/77693cb2dfcf4456b956bbfb3ec2cb10.jpg', '560', '1', '2015-03-08 21:28:16', '2015-03-08 21:28:16');
+INSERT INTO `tb_item` VALUES ('1219042', '【移动购机赠费】苹果（APPLE）iPhone 6 (A1589) 64GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/145465ba538e4d16878fbe6c17658b9c.jpg', '560', '1', '2015-03-08 21:27:42', '2015-03-08 21:27:42');
+INSERT INTO `tb_item` VALUES ('1219043', '【移动购机赠费】苹果（Apple）iPhone 6 (A1589) 64GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/13327061d6274795aaa5a424bab5b8cf.jpg', '560', '1', '2015-03-08 21:27:49', '2015-03-08 21:27:49');
+INSERT INTO `tb_item` VALUES ('1219045', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 金色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/143dd69bf1c04ad7b15c1e8d878ec231.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
+INSERT INTO `tb_item` VALUES ('1219046', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 16GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\"><font color=blue>更多药品速度围观，快来点我，点我</font></a>', '578800', '99999', null, 'http://image.taotao.com/jd/f58d499a7a6c4f3fa3943bf954c8d6a3.jpg', '560', '1', '2015-03-08 21:28:01', '2015-03-08 21:28:01');
+INSERT INTO `tb_item` VALUES ('1219053', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 64GB 银色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多药品速度围观，快来点我，点我</a>', '668800', '99999', null, 'http://image.taotao.com/jd/9913f6df14924ee4b03377c4becedf4f.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
 INSERT INTO `tb_item` VALUES ('1219059', '【移动购机赠费】苹果（Apple）iPhone 6 Plus (A1593) 64GB 深空灰色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~', '658800', '99999', null, 'http://image.taotao.com/jd/f78d665858de44a9885abe26e2b6e940.jpg', '560', '1', '2015-03-08 21:28:09', '2015-03-08 21:28:09');
 INSERT INTO `tb_item` VALUES ('1219071', '苹果(Apple) iPhone 6 Plus (A1524) 16G 银色 移动联通电信4G手机', '', '588800', '99999', null, 'http://image.taotao.com/jd/3db5f1a1b59e43d8b199612c253a1e8d.jpg', '560', '1', '2015-03-08 21:28:30', '2015-03-08 21:28:30');
 INSERT INTO `tb_item` VALUES ('1219075', '苹果(Apple) iPhone 6 (A1586) 64G 金色 移动联通电信4G手机', '', '598800', '99999', null, 'http://image.taotao.com/jd/428588640554445695b16d1e80d7b928.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
@@ -378,8 +378,8 @@ INSERT INTO `tb_item` VALUES ('1228416', '联想 A916 白色 联通4G手机 双�
 INSERT INTO `tb_item` VALUES ('1228472', '联想 X2-TO 16G 金色 移动4G手机 双卡双待', '5吋八核2.0GHz，1300+500像素，耀色倾城！', '199900', '99999', null, 'http://image.taotao.com/jd/15332b2343d84b3bad568219cb9068f6.jpg', '560', '1', '2015-03-08 21:28:44', '2015-03-08 21:28:44');
 INSERT INTO `tb_item` VALUES ('1228518', '三星(SAMSUNG)UA55HU7000J 55英寸 4K超高清智能LED电视 黑色 乐歌挂架套装', '', '976800', '99999', null, 'http://image.taotao.com/jd/638549f01834461aaca3edfc4daf51c7.jpg', '76', '1', '2015-03-08 21:29:12', '2015-03-08 21:29:12');
 INSERT INTO `tb_item` VALUES ('1229054', '【合约版】苹果（APPLE）iPhone 5s 16G版 移动4G手机 金色', '北京移动合约不换号返话费，少量货源，抢到就是赚到！<a  target=\"blank\"  href=\"http://sale.jd.com/act/5xPZsLtCbFTcYVD.html\">【更多选择请点击北京移动合约专场】</a>', '408800', '99999', null, 'http://image.taotao.com/jd/b4323c234e3446a7ad85db88e4971d91.jpg', '560', '1', '2015-03-08 21:28:44', '2015-03-08 21:28:44');
-INSERT INTO `tb_item` VALUES ('1229069', '【移动购机赠费】三星 Galaxy S5 (G9008V) 闪耀白 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多商品速度围观，快来点我，点我</a>', '329900', '99999', null, 'http://image.taotao.com/jd/4bc8b3a291274685a93cff345612779e.jpg', '560', '1', '2015-03-08 21:28:16', '2015-03-08 21:28:16');
-INSERT INTO `tb_item` VALUES ('1229074', '【移动购机赠费】三星 Galaxy Note 3 (N9008V) 16G版 白色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多商品速度围观，快来点我，点我</a>', '308800', '99999', null, 'http://image.taotao.com/jd/8cfdc2601ab84bddaf54fda16c2bc696.jpg', '560', '1', '2015-03-08 21:28:55', '2015-03-08 21:28:55');
+INSERT INTO `tb_item` VALUES ('1229069', '【移动购机赠费】三星 Galaxy S5 (G9008V) 闪耀白 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多药品速度围观，快来点我，点我</a>', '329900', '99999', null, 'http://image.taotao.com/jd/4bc8b3a291274685a93cff345612779e.jpg', '560', '1', '2015-03-08 21:28:16', '2015-03-08 21:28:16');
+INSERT INTO `tb_item` VALUES ('1229074', '【移动购机赠费】三星 Galaxy Note 3 (N9008V) 16G版 白色 移动4G手机', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~<a  target=\"blank\"  href=\"http://sale.jd.com/act/4SfT3WscrkpwRZ2V.html\">更多药品速度围观，快来点我，点我</a>', '308800', '99999', null, 'http://image.taotao.com/jd/8cfdc2601ab84bddaf54fda16c2bc696.jpg', '560', '1', '2015-03-08 21:28:55', '2015-03-08 21:28:55');
 INSERT INTO `tb_item` VALUES ('1229082', '【移动购机赠费】三星 Galaxy Note4 (N9100) 雅墨黑 移动联通4G手机 双卡双待', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~', '539900', '99999', null, 'http://image.taotao.com/jd/3c1bb3f99d42459698ffac58932dac2d.jpg', '560', '1', '2015-03-08 21:29:47', '2015-03-08 21:29:47');
 INSERT INTO `tb_item` VALUES ('1229083', '【移动购机赠费】三星 Galaxy Note4 (N9100) 幻影白 移动联通4G手机 双卡双待', '移动用户独享，不换号，买手机返话费，敬请参阅以下页面介绍~', '539900', '99999', null, 'http://image.taotao.com/jd/c12a34a84d7d4b89acc9babcc5268143.jpg', '560', '1', '2015-03-08 21:29:11', '2015-03-08 21:29:11');
 INSERT INTO `tb_item` VALUES ('1229269', '小米 4 联通合约版 白色 联通4G手机 不含合约计划', '', '209900', '99999', null, 'http://image.taotao.com/jd/f539e3add44c4b3a8eb455bc6b722fbd.jpg', '560', '1', '2015-03-08 21:33:47', '2015-03-08 21:33:47');
@@ -397,7 +397,7 @@ INSERT INTO `tb_item` VALUES ('1231490', '小米4 白色 联通3G手机', '卖�
 INSERT INTO `tb_item` VALUES ('1231630', '声光（SONIQ）S55T14A-CN 55英寸 无边框全高清 LED智能电视', '喜迎春节，声光有礼!!5星好评送50元话费!!LG原装进口3D模组屏，得4副3D眼镜！！', '588800', '99999', null, 'http://image.taotao.com/jd/4ecd153fc4d3499e823df6a873111c2b.jpg', '76', '1', '2015-03-08 21:28:55', '2015-03-08 21:28:55');
 INSERT INTO `tb_item` VALUES ('1231635', '声光（SONIQ）U65TX14A-CN 65英寸 UHD窄边框 LED智能电视', '喜迎春节，声光有礼!!5星好评送50元话费!!真4K，4副3D眼镜，适合全家分享！！', '1499900', '99999', null, 'http://image.taotao.com/jd/7e2a7226db094931ab669b20480ab3a2.jpg', '76', '1', '2015-03-08 21:28:08', '2015-03-08 21:28:08');
 INSERT INTO `tb_item` VALUES ('1232268', '大唐 (I518) 黑色 移动4G手机', '千元高配4G新品！5.5英寸FHD超清全屏，1300万第二代BSI摄像头！', '79900', '99999', null, 'http://image.taotao.com/jd/421144bebdbb4b11b1d62d4d51385ab7.jpg', '560', '1', '2015-03-08 21:29:19', '2015-03-08 21:29:19');
-INSERT INTO `tb_item` VALUES ('1232502', '一加（A0001）16GB 砂岩黑 JBL定制版 移动4G手机', '配套JBL E1+耳机！骁龙801处理器+3GB RAM！此商品不能使用京券、东券、不能开具增值税发票！', '219900', '99999', null, 'http://image.taotao.com/jd/0040beaee12b4da8a3456bc897163b09.jpg', '560', '1', '2015-03-08 21:28:01', '2015-03-08 21:28:01');
+INSERT INTO `tb_item` VALUES ('1232502', '一加（A0001）16GB 砂岩黑 JBL定制版 移动4G手机', '配套JBL E1+耳机！骁龙801处理器+3GB RAM！此药品不能使用京券、东券、不能开具增值税发票！', '219900', '99999', null, 'http://image.taotao.com/jd/0040beaee12b4da8a3456bc897163b09.jpg', '560', '1', '2015-03-08 21:28:01', '2015-03-08 21:28:01');
 INSERT INTO `tb_item` VALUES ('1232728', '三星 Galaxy S4 (I9500)16G版 镜湖蓝 联通3G手机', '三星经典旗舰机！5英寸1080P高清屏+双四核+2GB RAM+1300万像素主摄像头', '179900', '99999', null, 'http://image.taotao.com/jd/071018c764414f9fa40930dfe6c25473.jpg', '560', '1', '2015-03-08 21:28:44', '2015-03-08 21:28:44');
 INSERT INTO `tb_item` VALUES ('1234343', '创维酷开(coocaa)U55 55英寸智能酷开系统 4K超高清平板液晶电视(白色)', '酷开新品，原装LG 4K IPS硬屏，智能酷开系统，八核处理器，一体式座挂架！<a  target=\"blank\"  href=\"http://jmall.jd.com/p117514.html\">“猛戳这里，更多惊喜”</a>', '449900', '99999', null, 'http://image.taotao.com/jd/3b1ba39321b84873aef9a518a99a8995.jpg', '76', '1', '2015-03-08 21:27:35', '2015-03-08 21:27:35');
 INSERT INTO `tb_item` VALUES ('1235584', '诺基亚(NOKIA) Lumia 830 (RM-984) 绿色 联通3G手机', '诺记年度力作，内置智能中文Cortana软件，陪你生活点滴，更精美外观，PureView镜头！', '159900', '99999', null, 'http://image.taotao.com/jd/efc07d3391b84504b449bcc72aa43384.jpg', '560', '1', '2015-03-08 21:27:54', '2015-03-08 21:27:54');
@@ -841,13 +841,13 @@ INSERT INTO `tb_order` VALUES ('31221011', '1838', '1', '2', '3', '2018-04-14 16
 DROP TABLE IF EXISTS `tb_order_item`;
 CREATE TABLE `tb_order_item` (
   `id` varchar(20) COLLATE utf8_bin NOT NULL,
-  `item_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '商品id',
+  `item_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '药品id',
   `order_id` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '订单id',
-  `num` int(10) DEFAULT NULL COMMENT '商品购买数量',
-  `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '商品标题',
-  `price` bigint(50) DEFAULT NULL COMMENT '商品单价',
-  `total_fee` bigint(50) DEFAULT NULL COMMENT '商品总金额',
-  `pic_path` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '商品图片地址',
+  `num` int(10) DEFAULT NULL COMMENT '药品购买数量',
+  `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '药品名称',
+  `price` bigint(50) DEFAULT NULL COMMENT '药品单价',
+  `total_fee` bigint(50) DEFAULT NULL COMMENT '药品总金额',
+  `pic_path` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '药品图片地址',
   PRIMARY KEY (`id`),
   KEY `item_id` (`item_id`) USING BTREE,
   KEY `order_id` (`order_id`) USING BTREE
@@ -893,20 +893,20 @@ INSERT INTO `tb_order_shipping` VALUES ('3110', '延宇振', '1631818181', '1861
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_re_item`;
 CREATE TABLE `tb_re_item` (
-  `id` bigint(20) NOT NULL COMMENT '商品id，同时也是商品编号',
-  `title` varchar(100) NOT NULL COMMENT '商品标题',
-  `sell_point` varchar(500) DEFAULT NULL COMMENT '商品卖点',
-  `price` bigint(20) NOT NULL COMMENT '商品价格，单位为：分',
+  `id` bigint(20) NOT NULL COMMENT '药品id，同时也是药品编号',
+  `title` varchar(100) NOT NULL COMMENT '药品名称',
+  `sell_point` varchar(500) DEFAULT NULL COMMENT '药品卖点',
+  `price` bigint(20) NOT NULL COMMENT '药品价格，单位为：分',
   `num` int(10) NOT NULL COMMENT '库存数量',
-  `barcode` varchar(30) DEFAULT NULL COMMENT '商品条形码',
-  `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `barcode` varchar(30) DEFAULT NULL COMMENT '药品条形码',
+  `image` varchar(500) DEFAULT NULL COMMENT '药品图片',
   `cid` bigint(10) NOT NULL COMMENT '所属类目，叶子类目',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '药品状态，1-正常，2-下架，3-删除',
   `recovered` datetime NOT NULL COMMENT '回收时间',
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`),
   KEY `status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='药品表';
 
 -- ----------------------------
 -- Records of tb_re_item

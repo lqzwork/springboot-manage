@@ -22,15 +22,30 @@
           )
     </insert>
 
-    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        SELECT * from tb_item where id = #{id, jdbcType=INTEGER}
+    <select id="list" resultMap="BaseResultMap" parameterType="com.baixin.model.Item">
+        SELECT
+        o.id AS id,
+        u.title AS title,
+        o.operate AS operate,
+        o.modify_num AS modifyNum,
+        u.userName AS userName,
+        o.operate_time AS operateTime
+        FROM operate_log o
+        LEFT JOIN tb_item t ON o.item_id = t.id
+        LEFT JOIN tb_user u ON o.operate_user_id = u.id
+        WHERE 1 = 1 AND t.id = #{itemId}
+        ORDER BY operateTime desc
+        limit #{start, jdbcType=INTEGER},#{end, jdbcType=INTEGER}
     </select>
 
-    <!-- 更新库存 -->
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT * from operate_log where id = #{id, jdbcType=INTEGER}
+    </select>
+
     <update id="updateNum" parameterType="com.baixin.model.OperateLog">
-        UPDATE tb_item SET num = num + #{num} WHERE id = #{id}
+        UPDATE operate_log SET num = num + #{num} WHERE id = #{id}
     </update>
     <delete id="delete" parameterType="com.baixin.model.OperateLog">
-        DELETE FROM tb_item WHERE id = #{id, jdbcType=INTEGER}
+        DELETE FROM operate_log WHERE id = #{id, jdbcType=INTEGER}
     </delete>
 </mapper>

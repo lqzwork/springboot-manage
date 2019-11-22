@@ -46,7 +46,7 @@ public class OrderController {
                               @PathVariable Integer pageSize,
                               @PathVariable Integer pageCount,
                               Model model) {
-        if (pageSize == 0) pageSize = 50;
+        if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
         order.setMinOrderTime(DateUtil.strToDate(order.getMinOrderTimeStr()));
         order.setMaxOrderTime(DateUtil.strToDate(order.getMaxOrderTimeStr()));
@@ -153,7 +153,7 @@ public class OrderController {
                                @PathVariable Integer pageSize,
                                @PathVariable Integer pageCount,
                                Model model) {
-        if (pageSize == 0) pageSize = 50;
+        if (pageSize == 0) pageSize = 20;
         if (pageCurrent == 0) pageCurrent = 1;
 
 
