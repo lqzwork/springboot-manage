@@ -260,7 +260,7 @@ public class ItemController {
         pageCount = (page.getTotalSize() / pageSize) + 1;
         model.addAttribute("operateLogPageList", page.getContentList());
         String pageHTML =
-                PageUtil.getPageContent("listOperateLogPage_{pageCurrent}_{pageSize}_{pageCount}?title=" + operateLog.getTitle(), pageCurrent, pageSize, pageCount);
+                PageUtil.getPageContent("listOperateLogPage_{pageCurrent}_{pageSize}_{pageCount}?itemId=" + operateLog.getItemId(), pageCurrent, pageSize, pageCount);
         model.addAttribute("pageHTML", pageHTML);
         model.addAttribute("operateLog", operateLog);
         return "item/listOperateLogPage";
