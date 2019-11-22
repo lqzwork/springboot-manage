@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.baixin.mapper.OperateLogMapper">
-    <resultMap id="BaseResultMap" type="com.baixin.model.OperateLog">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="item_id" property="itemId" jdbcType="INTEGER"/>
-        <result column="modify_num" property="modifyNum" jdbcType="INTEGER"/>
-        <result column="operate" property="operate" jdbcType="VARCHAR"/>
-        <result column="operate_user_id" property="operateUserId" jdbcType="VARCHAR"/>
-        <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP"/>
+<mapper namespace = "com.baixin.mapper.OperateLogMapper">
+    <resultMap id = "BaseResultMap" type = "com.baixin.model.OperateLog">
+        <id column = "id" property = "id" jdbcType = "INTEGER"/>
+        <result column = "item_id" property = "itemId" jdbcType = "INTEGER"/>
+        <result column = "modify_num" property = "modifyNum" jdbcType = "INTEGER"/>
+        <result column = "operate" property = "operate" jdbcType = "VARCHAR"/>
+        <result column = "operate_user_id" property = "operateUserId" jdbcType = "VARCHAR"/>
+        <result column = "operate_time" property = "operateTime" jdbcType = "TIMESTAMP"/>
     </resultMap>
 
-    <insert id = "insert" useGeneratedKeys="true" keyProperty="id">
+    <resultMap id = "OperateLogMap" type = "com.baixin.model.OperateLog">
+        <id column = "id" property = "id"/>
+        <result column = "title" property = "title"/>
+        <result column = "norm" property = "norm"/>
+        <result column = "price" property = "price"/>
+        <result column = "operate" property = "operate"/>
+        <result column = "modifyNum" property = "modifyNum"/>
+        <result column = "unit" property = "unit"/>
+        <result column = "realName" property = "realName"/>
+        <result column = "operateTime" property = "operateTime"/>
+    </resultMap>
+
+    <select id = "listPage" resultMap="OperateLogMap" parameterType = "Map">
+        SELECT
+        o.id AS id,
+        t.title AS title,
+        t.norm AS norm,
+        t.price AS price,
+        o.operate AS operate,
+        o.modify_num AS modifyNum,
+        t.unit AS unit,
+        u.realName AS realName,
+        o.operate_time AS operateTime
+        FROM operate_log o
+        LEFT JOIN tb_item t ON o.item_id = t.id
+        LEFT JOIN tb_user u ON o.operate_user_id = u.id
+        WHERE 1 = 1
+        <if test="null != itemId and '' != itemId">
+            AND t.id = #{itemId}
+        </if>
+        ORDER BY operateTime desc
+        <if test="null != pageNum and '' != pageNum and null != pageSize and '' != pageSize">
+            limit ${(pageNum - 1) * pageSize}, ${pageSize}
+        </if>
+    </select>
+
+    <insert id = "insert" useGeneratedKeys = "true" keyProperty = "id">
         INSERT INTO operate_log (item_id, modify_num,operate,operate_user_id, operate_time)
          VALUE
          (
@@ -22,30 +58,26 @@
           )
     </insert>
 
-    <select id="list" resultMap="BaseResultMap" parameterType="com.baixin.model.Item">
+    <select id = "listPageCount" resultType = "java.lang.Integer" parameterType = "Map">
         SELECT
-        o.id AS id,
-        u.title AS title,
-        o.operate AS operate,
-        o.modify_num AS modifyNum,
-        u.userName AS userName,
-        o.operate_time AS operateTime
+            COUNT(o.id)
         FROM operate_log o
         LEFT JOIN tb_item t ON o.item_id = t.id
         LEFT JOIN tb_user u ON o.operate_user_id = u.id
-        WHERE 1 = 1 AND t.id = #{itemId}
-        ORDER BY operateTime desc
-        limit #{start, jdbcType=INTEGER},#{end, jdbcType=INTEGER}
+        WHERE 1 = 1
+        <if test="null != itemId and '' != itemId">
+            AND t.id = #{itemId}
+        </if>
     </select>
 
-    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id = "findById" resultMap = "BaseResultMap" parameterType = "java.lang.Integer">
         SELECT * from operate_log where id = #{id, jdbcType=INTEGER}
     </select>
 
-    <update id="updateNum" parameterType="com.baixin.model.OperateLog">
+    <update id = "updateNum" parameterType = "com.baixin.model.OperateLog">
         UPDATE operate_log SET num = num + #{num} WHERE id = #{id}
     </update>
-    <delete id="delete" parameterType="com.baixin.model.OperateLog">
+    <delete id = "delete" parameterType = "com.baixin.model.OperateLog">
         DELETE FROM operate_log WHERE id = #{id, jdbcType=INTEGER}
     </delete>
 </mapper>
