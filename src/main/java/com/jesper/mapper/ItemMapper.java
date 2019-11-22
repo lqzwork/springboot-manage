@@ -27,4 +27,15 @@ public interface ItemMapper {
 
 
     List<Item> selectAll();
+    
+    /**
+     * @desc 更新库存
+     *
+     * @auther: liqz
+     * @param: [item]
+     * @return: int
+     * @date: 2019-11-22 12:33
+     *
+     */
+    int updateNum(Item item);
 }

@@ -229,4 +229,12 @@ public class ItemController {
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
         return object;
     }
+    
+    @ResponseBody
+    @PostMapping("/user/itemEditNum")
+    public ResObject<Object> itemEditNum(Item item1) {
+        int update = itemMapper.updateNum(item1);
+        ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
+        return object;
+    }
 }

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>后台信息管理系统</title>
 
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 
     <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
     <link th:href="@{/css/plugins/footable/footable.core.css}" rel="stylesheet"/>
@@ -54,32 +54,41 @@
                             <form action="itemManage_0_0_0">
                                 <div class="row">
                                     <div class="col-sm-2 m-b-xs">
-                                        <input id="title" name="title" placeholder="商品标题" class="form-control" type="text" th:value="${item.title}"/>
+                                        <input id="title" name="title" placeholder="商品标题" class="form-control"
+                                               type="text" th:value="${item.title}"/>
                                     </div>
                                     <div class="col-sm-2 m-b-xs">
-                                       <select name="cid" id="cid" class="form-control" >
+                                        <select name="cid" id="cid" class="form-control">
                                             <option value="0" th:selected="${item.cid==0}">--请选择商品分类--</option>
-                                            <option th:each="ic : ${itemCategoryList}" th:value="${ic.id}" th:text="${ic.name}" th:selected="${ic.id==item.cid}">分类</option>
+                                            <option th:each="ic : ${itemCategoryList}" th:value="${ic.id}"
+                                                    th:text="${ic.name}" th:selected="${ic.id==item.cid}">分类
+                                            </option>
                                         </select>
                                     </div>
 
                                     <div class="col-sm-2 m-b-xs">
-                                        <input id="minPrice" name="minPrice" class="form-control" type="text" th:value="${item.minPrice}" placeholder="最低价格" />
+                                        <input id="minPrice" name="minPrice" class="form-control" type="text"
+                                               th:value="${item.minPrice}" placeholder="最低价格"/>
                                     </div>
                                     <div class="col-sm-2 m-b-xs">
-                                        <input id="maxPrice" name="maxPrice"  class="form-control" type="text" th:value="${item.maxPrice}" placeholder="最高价格"/>
+                                        <input id="maxPrice" name="maxPrice" class="form-control" type="text"
+                                               th:value="${item.maxPrice}" placeholder="最高价格"/>
                                     </div>
                                     <div class="col-sm-2 m-b-xs">
-                                        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong></button>
+                                        <button class="btn btn-primary btn-block" type="submit"><i
+                                                class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong>
+                                        </button>
                                     </div>
                                     <div class="col-sm-2 m-b-xs">
-                                        <a th:href="@{'download1'}" class="btn btn-primary btn-block" >&nbsp;&nbsp;&nbsp;&nbsp;<strong>导出</strong></a>
+                                        <a th:href="@{'download1'}" class="btn btn-primary btn-block">&nbsp;&nbsp;&nbsp;&nbsp;<strong>导出</strong></a>
                                     </div>
                                 </div>
                             </form>
                             <div class="row">
                                 <div class="col-sm-6 m-b-xs">
-                                    <a th:href="@{itemEdit}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增商品&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a th:href="@{itemEdit}" class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                       data-placement="left" title="" data-original-title="Refresh inbox"><i
+                                            class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增商品&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                 </div>
                                 <div class="col-sm-6 m-b-xs">
                                 </div>
@@ -103,12 +112,13 @@
                                 <table class=" table table-hover" data-page-size="10">
                                     <thead>
                                     <tr>
-                                        <th width="5%">ID</th>
-                                        <th width="39%">商品标题</th>
+                                        <th width="8%">ID</th>
+                                        <th width="27%">商品标题</th>
                                         <th width="8%">分类</th>
                                         <th width="8%">价格</th>
-                                        <th width="15%">库存数量</th>
-                                        <th width="15%">更新时间</th>
+                                        <th width="10%">库存数量</th>
+                                        <th width="12%">更新时间</th>
+                                        <th width="10%">买入/卖出数量</th>
                                         <!--<th width="10%">推荐状态</th>-->
                                         <th>操作</th>
                                     </tr>
@@ -121,11 +131,16 @@
                                         <td th:text="${item.price}">Onions</td>
                                         <td th:text="${item.num}">Onions</td>
                                         <td th:text="${item.updatedStr}">Onions</td>
-                                     
                                         <td>
-                                            <a th:href="@{'itemEdit?id='+${item.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="#" th:onclick="'javascript:updateState('+${item.id}+',2,0);'" title="删除"><i class="fa fa-trash-o text-navy"></i></a>
+                                            <input th:id="${item.id}+'num'" name="num" type="text" class="form-control"/>
+                                        </td>
+                                        <td>
+                                            <a th:onclick="'javascript:updateNum('+${item.id}+',2,1);'"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;买入</a>
+                                            <a th:onclick="'javascript:updateNum('+${item.id}+',2,-1);'"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-minus"></i>&nbsp;卖出</a>
+                                            <a th:onclick="'javascript:updateState('+${item.id}+',2,0);'"
+                                               class="btn btn-primary btn-sm glyphicon glyphicon-trash"/>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -179,27 +194,54 @@
     });
 
     /*<![CDATA[*/
-    function updateState(id,state,commendState){
+    function updateState(id, state, commendState) {
         var deleteTag;
-        if(state==2){
+        if (state == 2) {
             deleteTag = confirm("确定删除此条信息?");
         } else {
             deleteTag = true;
         }
-        if(deleteTag){
+        if (deleteTag) {
             $.ajax({
                 type: "POST",
-                url: "itemEditState?id="+id,
+                url: "itemEditState?id=" + id,
                 contentType: "application/json; charset=utf-8",
-                success: function(msg){
+                success: function (msg) {
                     window.location.reload();
                 },
-                error: function(){
+                error: function () {
                     alert("系统异常！");
                 }
             });
         }
     }
+
+    function updateNum(id, state, commendState) {
+        var deleteTag;
+        var num = $("#" + id + "num").val();
+        if (state == 2) {
+            deleteTag = confirm("确定更改该商品库存?");
+        } else {
+            deleteTag = true;
+        }
+        if (commendState == -1) {
+            num = num*(-1);
+        }
+        if (deleteTag) {
+            $.ajax({
+                type: "POST",
+                url: "itemEditNum?id=" + id + "&num=" + num,
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("系统异常！");
+                }
+            });
+        }
+    }
+
     /*]]>*/
 </script>
 

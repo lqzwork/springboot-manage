@@ -110,6 +110,11 @@
         </if>
         WHERE id = #{id, jdbcType=INTEGER}
     </update>
+
+    <!-- 更新库存 -->
+    <update id="updateNum" parameterType="com.jesper.model.Item">
+        UPDATE tb_item SET num = num + #{num} WHERE id = #{id}
+    </update>
     <delete id="delete" parameterType="com.jesper.model.Item">
         DELETE FROM tb_item WHERE id = #{id, jdbcType=INTEGER}
     </delete>
