@@ -25,9 +25,9 @@
                         <div class="ibox-title">
                             <h5>操作列表</h5>
                             <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
+                                <button id="backButton" class="btn btn-primary"
+                                        type="button">&nbsp;&nbsp;&nbsp;&nbsp;返&nbsp;&nbsp;&nbsp;&nbsp;回&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
                             </div>
                         </div>
                         <div class="ibox-content">
@@ -107,6 +107,11 @@
     $(document).ready(function () {
         $("#pageHTML").html(pageHTML);
     });
+
+    $("#backButton").click(function () {
+        window.history.go(-1);
+    });
+
 </script>
 
 </body>
