@@ -30,7 +30,7 @@
                         <a>药品管理</a>
                     </li>
                     <li class="active">
-                        <strong>药品管理</strong>
+                        <strong>药品列表</strong>
                     </li>
                 </ol>
             </div>
@@ -128,7 +128,10 @@
                                     <tbody>
                                     <tr th:each="item : ${itemList}">
                                         <td th:text="${item.id}">Onions</td>
-                                        <td th:text="${item.title}">Onions</td>
+                                        <td>
+                                            <a th:href="@{listOperateLogPage_0_0_0+'?itemId='+${item.id}}"
+                                               th:text="${item.title}"></a>
+                                        </td>
                                         <td th:text="${item.categoryName}">Onions</td>
                                         <td th:text="${item.norm}">Onions</td>
                                         <td th:text="${item.unit}">Onions</td>
@@ -136,7 +139,8 @@
                                         <td th:text="${item.num}">Onions</td>
                                         <td th:text="${item.updatedStr}">Onions</td>
                                         <td>
-                                            <input th:id="${item.id}+'num'" name="num" type="text" class="form-control"/>
+                                            <input th:id="${item.id}+'num'" name="num" type="text"
+                                                   class="form-control"/>
                                         </td>
                                         <td>
                                             <a th:onclick="'javascript:updateNum('+${item.id}+',2,1);'"
@@ -233,7 +237,7 @@
             deleteTag = true;
         }
         if (commendState == -1) {
-            num = num*(-1);
+            num = num * (-1);
         }
         if (deleteTag) {
             $.ajax({

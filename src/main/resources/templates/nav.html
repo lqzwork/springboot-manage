@@ -20,7 +20,7 @@
                             <span class="clear"> 
                             	<span class="block m-t-xs">
                             		<strong class="font-bold" th:text="${session.user.getUserName()}">username</strong>
-                             	</span> 
+                             	</span>
                              </span>
                      	</a>
                     </div>
@@ -28,20 +28,21 @@
                         YX
                     </div>
                 </li>
-                <li>
+                <li th:if="${session.user.getHeadPicture() == 'admin'}">
                     <a th:href="@{dashboard}"><i class="fa fa-diamond"></i> <span class="nav-label">仪表盘</span></a>
                 </li>
 
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">药品管理</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li id="itemManage"><a th:href="@{itemManage_0_0_0}">药品管理</a></li>
-                        <li id="stockManage"><a th:href="@{stockManage_0_0_0}">库存管理</a></li>
+                        <li id="itemManage"><a th:href="@{itemManage_0_0_0}">药品列表</a></li>
+                        <li id="stockManage" th:if="${session.user.getHeadPicture() == 'admin'}"><a
+                                th:href="@{stockManage_0_0_0}">库存管理</a></li>
                         <li id="itemCategoryManage"><a th:href="@{itemCategoryManage_0_0_0}">药品分类</a></li>
-                        <li id="recoverManage"><a th:href="@{recoverManage_0_0_0}">回收管理</a></li>
+                        <li id="recoverManage" th:if="${session.user.getHeadPicture() == 'admin'}"><a th:href="@{recoverManage_0_0_0}">回收管理</a></li>
                     </ul>
                 </li>
-                <li>
+                <li th:if="${session.user.getHeadPicture() == 'admin'}">
                     <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">订单管理</span><span class="label label-warning pull-right">16</span></a>
                     <ul class="nav nav-second-level collapse">
                         <li id="orderManage"><a th:href="@{orderManage_0_0_0}">订单管理</a></li>
