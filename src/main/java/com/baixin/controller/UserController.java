@@ -134,9 +134,9 @@ public class UserController {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(Sender);
             message.setTo(email); //接收者邮箱
-            message.setSubject("YX后台信息管理系统-密码找回");
+            message.setSubject("BX后台药品管理系统-密码找回");
             StringBuilder sb = new StringBuilder();
-            sb.append(user.getUserName() + "用户您好！您的注册密码是：" + password + "。感谢您使用YX信息管理系统！");
+            sb.append(user.getUserName() + "用户您好！您的注册密码是：" + password + "。感谢您使用BX药品管理系统！");
             message.setText(sb.toString());
             mailSender.send(message);
             model.addAttribute("error", "密码已发到您的邮箱,请查收！");
