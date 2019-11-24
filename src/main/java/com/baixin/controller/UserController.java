@@ -159,7 +159,8 @@ public class UserController {
         user.setUpdateDate(date);
         int i = userMapper.update(user);
         httpSession.setAttribute("user",user);
-        return "redirect:userManage";
+        // return "redirect:userManage";
+        return "redirect:itemManage_0_0_0";
     }
 
 }
