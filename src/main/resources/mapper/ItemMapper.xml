@@ -4,10 +4,12 @@
     <resultMap id="BaseResultMap" type="com.baixin.model.Item">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="supplier" property="supplier" jdbcType="VARCHAR"/>
         <result column="sell_point" property="sellPoint" jdbcType="VARCHAR"/>
         <result column="norm" property="norm" jdbcType="VARCHAR"/>
         <result column="unit" property="unit" jdbcType="VARCHAR"/>
-        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="sell_price" property="sellPrice" jdbcType="DOUBLE"/>
         <result column="num" property="num" jdbcType="INTEGER"/>
         <result column="barcode" property="barcode" jdbcType="VARCHAR"/>
         <result column="image" property="image" jdbcType="VARCHAR"/>
@@ -74,13 +76,15 @@
         </if>
     </select>
     <insert id="insert" parameterType="com.baixin.model.Item" useGeneratedKeys="true" keyProperty="id">
-         INSERT INTO tb_item (title, sell_point,norm,unit, price, num, barcode, image, cid, status,create_user_id, created,updte_user_id, updated)
+         INSERT INTO tb_item (title, supplier, sell_point,norm,unit, price, sell_price, num, barcode, image, cid, status,create_user_id, created,updte_user_id, updated)
          VALUE (
          #{title, jdbcType=VARCHAR},
+         #{supplier, jdbcType=VARCHAR},
          #{sellPoint, jdbcType=VARCHAR},
          #{norm, jdbcType=VARCHAR},
          #{unit, jdbcType=VARCHAR},
-         #{price, jdbcType=INTEGER},
+         #{price, jdbcType=DOUBLE},
+         #{sellPrice, jdbcType=DOUBLE},
          #{num, jdbcType=INTEGER},
          #{barcode, jdbcType=VARCHAR},
          #{image, jdbcType=VARCHAR},
@@ -98,6 +102,9 @@
         <if test="title != null">
             title = #{title, jdbcType=VARCHAR},
         </if>
+        <if test="supplier != null">
+            supplier = #{supplier, jdbcType=VARCHAR},
+        </if>
         <if test="sellPoint != null">
             sell_point= #{sellPoint, jdbcType=VARCHAR},
         </if>
@@ -108,7 +115,10 @@
             unit = #{unit, jdbcType=VARCHAR},
         </if>
         <if test="price != null">
-            price = #{price, jdbcType=INTEGER},
+            price = #{price, jdbcType=DOUBLE},
+        </if>
+        <if test="sellPrice != null">
+            sell_price = #{sellPrice, jdbcType=DOUBLE},
         </if>
         <if test="num != null">
             num = #{num, jdbcType=INTEGER},

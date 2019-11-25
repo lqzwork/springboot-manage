@@ -191,10 +191,12 @@ public class ItemController {
         reItem.setNorm(item.getNorm());
         reItem.setUnit(item.getUnit());
         reItem.setPrice(item.getPrice());
+        reItem.setSellPrice(item.getSellPrice());
         reItem.setNum(item.getNum());
         reItem.setSellPoint(item.getSellPoint());
         reItem.setStatus(item.getStatus());
         reItem.setTitle(item.getTitle());
+        reItem.setSupplier(item.getSupplier());
         reItem.setRecovered(new Date());
         reItem.setCreateUserId(item.getCreateUserId());
         User user = (User) httpSession.getAttribute("user");

@@ -8,10 +8,12 @@ import java.util.Date;
 public class Item extends BaseObject{
     private int id;
     private String title;
+    private String supplier;
     private String sellPoint;
     private String norm;
     private String unit;
-    private int price;
+    private Double price;
+    private Double sellPrice;
     private int num;
     private String barcode;
     private String image;

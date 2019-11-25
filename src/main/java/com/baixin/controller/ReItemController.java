@@ -69,10 +69,12 @@ public class ReItemController {
         item.setNorm(reItem1.getNorm());
         item.setUnit(reItem1.getUnit());
         item.setPrice(reItem1.getPrice());
+        item.setSellPrice(reItem1.getSellPrice());
         item.setNum(reItem1.getNum());
         item.setSellPoint(reItem1.getSellPoint());
         item.setStatus(reItem1.getStatus());
         item.setTitle(reItem1.getTitle());
+        item.setSupplier(reItem1.getSupplier());
         item.setCreated(new Date());
         item.setUpdated(new Date());
         item.setCreateUserId(reItem1.getCreateUserId() + "");

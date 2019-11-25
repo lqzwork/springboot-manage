@@ -112,14 +112,16 @@
                                 <table class=" table table-hover" data-page-size="10">
                                     <thead>
                                     <tr>
-                                        <th width="6%">ID</th>
-                                        <th width="22%">药品名称</th>
+                                        <th width="4%">ID</th>
+                                        <th width="8%">药品名称</th>
+                                        <th width="18%">供应商/产地</th>
                                         <th width="5%">分类</th>
                                         <th width="6%">规格</th>
-                                        <th width="5%">单位</th>
-                                        <th width="6%">价格</th>
-                                        <th width="9%">库存数量</th>
-                                        <th width="14%">更新时间</th>
+                                        <th width="4%">单位</th>
+                                        <th width="4%">进价</th>
+                                        <th width="4%">售价</th>
+                                        <th width="7%">库存数量</th>
+                                        <th width="13%">更新时间</th>
                                         <th width="10%">买入/卖出数量</th>
                                         <!--<th width="10%">推荐状态</th>-->
                                         <th>操作</th>
@@ -132,10 +134,12 @@
                                             <a th:href="@{listOperateLogPage_0_0_0+'?itemId='+${item.id}}"
                                                th:text="${item.title}"></a>
                                         </td>
+                                        <td th:text="${item.supplier}">Onions</td>
                                         <td th:text="${item.categoryName}">Onions</td>
                                         <td th:text="${item.norm}">Onions</td>
                                         <td th:text="${item.unit}">Onions</td>
                                         <td th:text="${item.price}">Onions</td>
+                                        <td th:text="${item.sellPrice}">Onions</td>
                                         <td th:text="${item.num}">Onions</td>
                                         <td th:text="${item.updatedStr}">Onions</td>
                                         <td>
