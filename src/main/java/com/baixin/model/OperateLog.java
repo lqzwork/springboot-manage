@@ -16,8 +16,10 @@ public class OperateLog extends BaseObject{
     
     /** 以下为非数据库映射属性 */
     private String title;
+    private String supplier;
     private String norm;
     private String price;
+    private String sellPrice;
     private String unit;
     private String realName;
 }

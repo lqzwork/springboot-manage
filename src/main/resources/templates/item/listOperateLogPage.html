@@ -35,23 +35,27 @@
                                 <table class=" table table-hover" data-page-size="10">
                                     <thead>
                                     <tr>
-                                        <th width="6%">操作编号</th>
-                                        <th width="22%">药品名称</th>
-                                        <th width="6%">药品规格</th>
-                                        <th width="6%">药品单价</th>
-                                        <th width="6%">操作类型</th>
+                                        <th width="7%">操作编号</th>
+                                        <th width="8%">药品名称</th>
+                                        <th width="18%">供应商/产地</th>
+                                        <th width="6%">规格</th>
+                                        <th width="6%">进价</th>
+                                        <th width="6%">售价</th>
+                                        <th width="8%">操作类型</th>
                                         <th width="10%">买入/卖出数量</th>
-                                        <th width="6%">药品单位</th>
+                                        <th width="6%">单位</th>
                                         <th width="10%">操作人</th>
-                                        <th width="18%">操作时间</th>
+                                        <th>操作时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="operateLog : ${operateLogPageList}">
                                         <td th:text="${operateLog.id}">Onions</td>
                                         <td th:text="${operateLog.title}">Onions</td>
+                                        <td th:text="${operateLog.supplier}">Onions</td>
                                         <td th:text="${operateLog.norm}">Onions</td>
                                         <td th:text="${operateLog.price}">Onions</td>
+                                        <td th:text="${operateLog.sellPrice}">Onions</td>
                                         <td th:text="${operateLog.operate}">Onions</td>
                                         <td th:text="${operateLog.modifyNum}">Onions</td>
                                         <td th:text="${operateLog.unit}">Onions</td>

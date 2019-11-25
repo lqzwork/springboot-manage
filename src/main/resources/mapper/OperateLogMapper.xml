@@ -13,8 +13,10 @@
     <resultMap id = "OperateLogMap" type = "com.baixin.model.OperateLog">
         <id column = "id" property = "id"/>
         <result column = "title" property = "title"/>
+        <result column = "supplier" property = "supplier"/>
         <result column = "norm" property = "norm"/>
         <result column = "price" property = "price"/>
+        <result column = "sell_price" property = "sell_price"/>
         <result column = "operate" property = "operate"/>
         <result column = "modifyNum" property = "modifyNum"/>
         <result column = "unit" property = "unit"/>
@@ -26,8 +28,10 @@
         SELECT
         o.id AS id,
         t.title AS title,
+        t.supplier AS supplier,
         t.norm AS norm,
         t.price AS price,
+        t.sell_price AS sellPrice,
         o.operate AS operate,
         o.modify_num AS modifyNum,
         t.unit AS unit,
