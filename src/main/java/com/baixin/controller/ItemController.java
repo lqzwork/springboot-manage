@@ -71,6 +71,7 @@ public class ItemController {
         itemList = itemMapper.list(item);
         for(Item i : itemList) {
             i.setUpdatedStr(DateUtil.getDateStr(i.getUpdated()));
+            i.setCreatedStr(DateUtil.getDateStr(i.getCreated()));
         }
         ItemCategory itemCategory = new ItemCategory();
         itemCategory.setStart(0);
@@ -96,17 +97,18 @@ public class ItemController {
         LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();
         fieldMap.put("id", "药品id");
         fieldMap.put("title", "药品名称");
-        fieldMap.put("sellPoint", "药品卖点");
-        fieldMap.put("price", "药品价格");
+        fieldMap.put("supplier", "供应商/产地");
+        fieldMap.put("norm", "规格");
+        fieldMap.put("unit", "单位");
+        fieldMap.put("price", "药品进价");
+        fieldMap.put("sellPrice", "药品售价");
         fieldMap.put("num", "库存数量");
-        fieldMap.put("image", "药品图片");
-        fieldMap.put("cid", "所属类目，叶子类目");
-        fieldMap.put("status", "药品状态，1-正常，2-下架，3-删除");
-        fieldMap.put("created", "创建时间");
-        fieldMap.put("updated", "更新时间");
+        fieldMap.put("createUserId", "创建人ID");
+        fieldMap.put("createdStr", "创建时间");
+        fieldMap.put("updatedStr", "更新时间");
         String sheetName = "药品管理报表";
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-disposition", "attachment;filename=ItemManage.xls");//默认Excel名称
+        response.setHeader("Content-disposition", "attachment;filename=baixin_yiyao.xls");//默认Excel名称
         response.flushBuffer();
         OutputStream fos = response.getOutputStream();
         try {
@@ -211,6 +213,7 @@ public class ItemController {
     @PostMapping("/user/itemEditNum")
     @Transactional
     public ResObject<Object> itemEditNum(Item item1, HttpSession httpSession) {
+        item1.setUpdated(new Date());
         int update = itemMapper.updateNum(item1);
         OperateLog operateLog = new OperateLog();
         operateLog.setItemId(item1.getId() + "");
