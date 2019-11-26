@@ -62,7 +62,7 @@ public class UserController {
         if (user1 != null) {
             httpSession.setAttribute("user", user1);
             User name = (User) httpSession.getAttribute("user");
-            return "redirect:dashboard";
+            return "redirect:itemManage_0_0_0";
         } else {
             model.addAttribute("error", "用户名或密码错误，请重新登录！");
             return "login";
