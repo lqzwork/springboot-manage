@@ -140,7 +140,8 @@
                                         <td th:text="${item.unit}">Onions</td>
                                         <td th:text="${item.price}">Onions</td>
                                         <td th:text="${item.sellPrice}">Onions</td>
-                                        <td th:text="${item.num}">Onions</td>
+                                        <td th:id="${item.id}+'totalNum'" th:value="${item.num}"
+                                            th:text="${item.num}">Onions</td>
                                         <td th:text="${item.updatedStr}">Onions</td>
                                         <td>
                                             <input th:id="${item.id}+'num'" name="num" type="text"
@@ -231,12 +232,23 @@
     function updateNum(id, state, commendState) {
         var deleteTag;
         var num = $("#" + id + "num").val();
-        if (0 == num) {
-            alert("药品操作数量异常");
+        var totalNum = $("#" + id + "totalNum").text();
+
+        if (null == num || num <= 0) {
+            alert("药品操作数量异常，应该大于0");
+            $("#" + id + "num").val(1)
             return;
         }
-        if (state == 2) {
-            deleteTag = confirm("确定更改该药品库存?");
+        if (commendState == 1) {
+            deleteTag = confirm("确定要买入该药品，买入数量为" + num + "？");
+        } else if (commendState == -1) {
+            if(num > totalNum) {
+                alert("卖出数量不能大于剩余库存量，最大可卖出" + totalNum);
+                $("#" + id + "num").val(totalNum)
+                return;
+            }else {
+                deleteTag = confirm("确定要卖出该药品，卖出数量为" + num + "？");
+            }
         } else {
             deleteTag = true;
         }
