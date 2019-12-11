@@ -46,7 +46,7 @@ public class ItemController {
     
     public static final String ROOT = "src/main/resources/static/img/item/";
     
-    MongoUtil mongoUtil = new MongoUtil();
+    // MongoUtil mongoUtil = new MongoUtil();
     
     private final ResourceLoader resourceLoader;
     
@@ -132,7 +132,8 @@ public class ItemController {
         if(item.getId() != 0) {
             Item item1 = itemMapper.findById(item);
             String id = String.valueOf(item.getId());
-            GridFSDBFile fileById = mongoUtil.getFileById(id);
+            // GridFSDBFile fileById = mongoUtil.getFileById(id);
+            GridFSDBFile fileById = null;
             if(fileById != null) {
                 StringBuilder sb = new StringBuilder(ROOT);
                 imageName = fileById.getFilename();

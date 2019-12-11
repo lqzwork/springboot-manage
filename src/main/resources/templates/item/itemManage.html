@@ -233,18 +233,18 @@
         var deleteTag;
         var num = $("#" + id + "num").val();
         var totalNum = $("#" + id + "totalNum").text();
-
+        alert("totalNum:" + totalNum + "--num:" + num);
         if (null == num || num <= 0) {
             alert("药品操作数量异常，应该大于0");
-            $("#" + id + "num").val(1)
+            $("#" + id + "num").val(1);
             return;
         }
         if (commendState == 1) {
             deleteTag = confirm("确定要买入该药品，买入数量为" + num + "？");
         } else if (commendState == -1) {
-            if(num > totalNum) {
+            if(num - totalNum > 0) {
                 alert("卖出数量不能大于剩余库存量，最大可卖出" + totalNum);
-                $("#" + id + "num").val(totalNum)
+                $("#" + id + "num").val(totalNum);
                 return;
             }else {
                 deleteTag = confirm("确定要卖出该药品，卖出数量为" + num + "？");
