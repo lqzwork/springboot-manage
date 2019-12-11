@@ -37,16 +37,16 @@ public class MongoUtilTest {
 
     @Test
     public void getFileByIdTest(){
-        MongoUtil mongoUtil = new MongoUtil();
-        String id = "92b2d9bb14ee44dbbeac339abfa30d2c";
-        String dbName = "baixin";
-        String collectionName = "myimage";
-        GridFSDBFile fileById = mongoUtil.getFileById(id);
-        try {
-            System.out.println(fileById.writeTo(new File("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static/img/jyxmust.jpg")));
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
+        // MongoUtil mongoUtil = new MongoUtil();
+        // String id = "92b2d9bb14ee44dbbeac339abfa30d2c";
+        // String dbName = "baixin";
+        // String collectionName = "myimage";
+        // GridFSDBFile fileById = mongoUtil.getFileById(id);
+        // try {
+        //     System.out.println(fileById.writeTo(new File("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static/img/jyxmust.jpg")));
+        // }catch (Exception ex){
+        //     ex.printStackTrace();
+        // }
         System.out.println("get File by Id Success");
     }
 
@@ -56,10 +56,10 @@ public class MongoUtilTest {
         String dbName = "baixin";
         String collectionName = "myimage";
         List<GridFSDBFile> files = mongoUtil.getAllFile();
-        for (GridFSDBFile file:files) {
-            //file.writeTo(new File("${path}"))
-            System.out.println(file.getId() + ":" + file.getFilename());
-        }
+        // for (GridFSDBFile file:files) {
+        //     //file.writeTo(new File("${path}"))
+        //     System.out.println(file.getId() + ":" + file.getFilename());
+        // }
         System.out.println("get All File Sucess!!");
     }
 

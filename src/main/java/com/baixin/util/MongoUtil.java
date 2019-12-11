@@ -83,14 +83,14 @@ public class MongoUtil {
 
         try {
             //获得mongoDB数据库连接。
-            Mongo mongo = getMongo();
-            //获得库
-            DB db = mongo.getDB(dbName);
-            //获得子集
-            GridFS gridFS = new GridFS(db, collectionName);
-            //删除文件
-            DBObject query = new BasicDBObject("_id", id);
-            gridFS.remove(query);
+            // Mongo mongo = getMongo();
+            // //获得库
+            // DB db = mongo.getDB(dbName);
+            // //获得子集
+            // GridFS gridFS = new GridFS(db, collectionName);
+            // //删除文件
+            // DBObject query = new BasicDBObject("_id", id);
+            // gridFS.remove(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -107,17 +107,17 @@ public class MongoUtil {
     public void batchDeleteFileByIds(String[] ids) {
         try {
             //获得mongoDB数据库连接。
-            Mongo mongo = getMongo();
-            //获得库
-            DB db = mongo.getDB(dbName);
-            //获得子集
-            GridFS gridFS = new GridFS(db, collectionName);
-            Map<String, String> map = new HashMap<String, String>();
-            for (int i = 0; i < ids.length; i++) {
-                //删除文件
-                DBObject query = new BasicDBObject("_id", ids[i]);
-                gridFS.remove(query);
-            }
+            // Mongo mongo = getMongo();
+            // //获得库
+            // DB db = mongo.getDB(dbName);
+            // //获得子集
+            // GridFS gridFS = new GridFS(db, collectionName);
+            // Map<String, String> map = new HashMap<String, String>();
+            // for (int i = 0; i < ids.length; i++) {
+            //     //删除文件
+            //     DBObject query = new BasicDBObject("_id", ids[i]);
+            //     gridFS.remove(query);
+            // }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,14 +133,14 @@ public class MongoUtil {
         GridFSDBFile gridFSDBFile = null;
         try {
             //获得mongoDB数据库连接。
-            Mongo mongo = getMongo();
-            //获得库
-            DB db = mongo.getDB(dbName);
-            //获得子集
-            GridFS gridFS = new GridFS(db, collectionName);
-            //获得文件
-            DBObject query = new BasicDBObject("_id", id);
-            gridFSDBFile = gridFS.findOne(query);
+            // Mongo mongo = getMongo();
+            // //获得库
+            // DB db = mongo.getDB(dbName);
+            // //获得子集
+            // GridFS gridFS = new GridFS(db, collectionName);
+            // //获得文件
+            // DBObject query = new BasicDBObject("_id", id);
+            // gridFSDBFile = gridFS.findOne(query);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,15 +161,15 @@ public class MongoUtil {
         List<GridFSDBFile> gridFSDBFileList = null;
         try {
             //获得mongoDB数据库连接。
-            Mongo mongo = getMongo();
-            //获得库
-            DB db = mongo.getDB(dbName);
-            //获得子集
-            GridFS gridFS = new GridFS(db, collectionName);
-            //获得文件
-            DBObject query = new BasicDBObject();//空的构造
-            gridFSDBFileList = gridFS.find(query);
-            mongo.close();
+            // Mongo mongo = getMongo();
+            // //获得库
+            // DB db = mongo.getDB(dbName);
+            // //获得子集
+            // GridFS gridFS = new GridFS(db, collectionName);
+            // //获得文件
+            // DBObject query = new BasicDBObject();//空的构造
+            // gridFSDBFileList = gridFS.find(query);
+            // mongo.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
