@@ -6,8 +6,10 @@ import com.baixin.mapper.ItemMapper;
 import com.baixin.mapper.ReItemMapper;
 import com.baixin.model.*;
 import com.baixin.service.OperateLogService;
-import com.baixin.util.*;
-import com.mongodb.gridfs.GridFSDBFile;
+import com.baixin.util.Constant;
+import com.baixin.util.DateUtil;
+import com.baixin.util.ExcelUtil;
+import com.baixin.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -133,19 +135,19 @@ public class ItemController {
             Item item1 = itemMapper.findById(item);
             String id = String.valueOf(item.getId());
             // GridFSDBFile fileById = mongoUtil.getFileById(id);
-            GridFSDBFile fileById = null;
-            if(fileById != null) {
-                StringBuilder sb = new StringBuilder(ROOT);
-                imageName = fileById.getFilename();
-                sb.append(imageName);
-                try {
-                    getFile = new File(sb.toString());
-                    fileById.writeTo(getFile);
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-                item1.setImage(imageName);
-            }
+            // GridFSDBFile fileById = null;
+            // if(fileById != null) {
+            //     StringBuilder sb = new StringBuilder(ROOT);
+            //     imageName = fileById.getFilename();
+            //     sb.append(imageName);
+            //     try {
+            //         getFile = new File(sb.toString());
+            //         fileById.writeTo(getFile);
+            //     } catch(Exception e) {
+            //         e.printStackTrace();
+            //     }
+            //     item1.setImage(imageName);
+            // }
             model.addAttribute("item", item1);
         }
         return "item/itemEdit";
