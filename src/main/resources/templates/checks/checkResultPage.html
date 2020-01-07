@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>后台信息管理系统</title>
+
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/footable/footable.core.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="nav :: navigation"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="header :: headerTop"></div>
+        <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
+            <div class="col-lg-10">
+                <h2>报告单管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">首页</a>
+                    </li>
+                    <li>
+                        <a>报告信息管理</a>
+                    </li>
+                    <li class="active">
+                        <strong>报告信息列表</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>搜索&amp;操作</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content" style="display: block;">
+                            <form action="checkResultPage_0_0_0">
+                                <div class="row">
+                                    <div class="col-sm-2 m-b-xs">
+                                        <input id="patientName" name="patientName" placeholder="患者名称" class="form-control"
+                                               type="text" th:value="${checkResult.patientName}"/>
+                                    </div>
+
+                                    <div class="col-sm-2 m-b-xs">
+                                        <input id="checkReportDate" name="checkReportDate" class="form-control" type="text"
+                                               th:value="${checkResult.checkReportDate}" placeholder="报告时间"/>
+                                    </div>
+                                    <div class="col-sm-2 m-b-xs">
+                                        <button class="btn btn-primary btn-block" type="submit"><i
+                                                class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-sm-6 m-b-xs">
+                                    <a th:href="@{checkResultEdit}" class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                       data-placement="left" title="" data-original-title="Refresh inbox"><i
+                                            class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增报告信息&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </div>
+                                <div class="col-sm-6 m-b-xs">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>检验报告信息列表</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class=" table table-hover" data-page-size="10">
+                                    <thead>
+                                    <tr>
+                                        <th width="4%">ID</th>
+                                        <th width="7%">患者姓名</th>
+                                        <th width="4%">性别</th>
+                                        <th width="4%">年龄</th>
+                                        <th width="5%">住院号</th>
+                                        <th width="7%">送检科室</th>
+                                        <th th:if="${session.user.getHeadPicture() == 'admin'}" width="7%">床号</th>
+                                        <th width="7%">标本类型</th>
+                                        <th width="5%">门诊号</th>
+                                        <th width="7%">标本状态</th>
+                                        <th width="5%">样本号</th>
+                                        <th width="8%">送检日期</th>
+                                        <th width="7%">送检医师</th>
+                                        <th width="6%">检验师</th>
+                                        <th width="8%">报告时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="checkResult : ${checkResultPageList}">
+                                        <td th:text="${checkResult.id}">Onions</td>
+                                        <td th:text="${checkResult.patientName}">Onions</td>
+                                        <td th:text="${checkResult.patientSex}">Onions</td>
+                                        <td th:text="${checkResult.patientAge}">Onions</td>
+                                        <td th:text="${checkResult.patientHostNum}">Onions</td>
+                                        <td th:text="${checkResult.inspecDepart}">Onions</td>
+                                        <td th:text="${checkResult.patientBedNum}">Onions</td>
+                                        <td th:text="${checkResult.specimenType}">Onions</td>
+                                        <td th:text="${checkResult.outpatService}">Onions</td>
+                                        <td th:text="${checkResult.specimenStatus}">Onions</td>
+                                        <td th:text="${checkResult.sampleNum}">Onions</td>
+                                        <td th:text="${checkResult.inspecDate}">Onions</td>
+                                        <td th:text="${checkResult.inspecDoctor}">Onions</td>
+                                        <td th:text="${checkResult.checkDoctor}">Onions</td>
+                                        <td th:text="${checkResult.checkReportDate}">Onions</td>
+                                        <td>
+                                            <a th:onclick="'javascript:updateNum('+${checkResult.id}+',2,1);'"
+                                               class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;买入</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="8">
+                                            <ul id="pageHTML" class="pagination pull-right"></ul>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer" th:include="footer :: copyright"></div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+<!-- Peity -->
+<script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+
+<!-- Custom and plugin javascript -->
+<script th:src="@{/js/inspinia.js}"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+<!-- iCheck -->
+<script th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
+
+<!-- Peity -->
+<script th:src="@{/js/demo/peity-demo.js}"></script>
+
+<!-- FooTable -->
+<script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
+
+<!-- common -->
+<script th:src="@{/js/common.js}"></script>
+
+<script th:inline="javascript">
+    var pageHTML = [[${pageHTML}]];
+    $(document).ready(function () {
+        $("#pageHTML").html(pageHTML);
+    });
+
+    /*<![CDATA[*/
+    function updateState(id, state, commendState) {
+        var deleteTag;
+        if (state == 2) {
+            deleteTag = confirm("确定删除此条信息?");
+        } else {
+            deleteTag = true;
+        }
+        if (deleteTag) {
+            $.ajax({
+                type: "POST",
+                url: "itemEditState?id=" + id,
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("系统异常！");
+                }
+            });
+        }
+    }
+
+    function updateNum(id, state, commendState) {
+        var deleteTag;
+        var num = $("#" + id + "num").val();
+        var totalNum = $("#" + id + "totalNum").text();
+
+        if (null == num || num <= 0) {
+            alert("药品操作数量异常，应该大于0");
+            $("#" + id + "num").val(1);
+            return;
+        }
+        if (commendState == 1) {
+            deleteTag = confirm("确定要买入该药品，买入数量为" + num + "？");
+        } else if (commendState == -1) {
+            if(num - totalNum > 0) {
+                alert("卖出数量不能大于剩余库存量，最大可卖出" + totalNum);
+                $("#" + id + "num").val(totalNum);
+                return;
+            }else {
+                deleteTag = confirm("确定要卖出该药品，卖出数量为" + num + "？");
+            }
+        } else {
+            deleteTag = true;
+        }
+        if (commendState == -1) {
+            num = num * (-1);
+        }
+        if (deleteTag) {
+            $.ajax({
+                type: "POST",
+                url: "itemEditNum?id=" + id + "&num=" + num,
+                contentType: "application/json; charset=utf-8",
+                success: function (msg) {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("系统异常！");
+                }
+            });
+        }
+    }
+
+    /*]]>*/
+</script>
+
+</body>
+
+</html>

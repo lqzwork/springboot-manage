@@ -1,5 +1,6 @@
 package com.baixin.common;
 
+import com.baixin.model.CheckResult;
 import com.baixin.model.OperateLog;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PageInfo {
     public static int pageSize = 20;
     private int pageNum;
     private List<OperateLog> contentList;
+    private List<CheckResult> contentList2;
 
     public int getTotalSize() {
         return totalSize;
@@ -49,5 +51,12 @@ public class PageInfo {
     public void setContentList(List<OperateLog> contentList) {
         this.contentList = contentList;
     }
-
+    
+    public List<CheckResult> getContentList2() {
+        return contentList2;
+    }
+    
+    public void setContentList2(List<CheckResult> contentList2) {
+        this.contentList2 = contentList2;
+    }
 }

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baixin.mapper.CheckResultMapper">
+    <resultMap id="BaseResultMap" type="com.baixin.model.CheckResult">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="patient_name" property="patientName" jdbcType="VARCHAR"/>
+        <result column="patient_sex" property="patientSex" jdbcType="VARCHAR"/>
+        <result column="patient_age" property="patientAge" jdbcType="VARCHAR"/>
+        <result column="patient_host_num" property="patientHostNum" jdbcType="VARCHAR"/>
+        <result column="inspec_depart" property="inspecDepart" jdbcType="VARCHAR"/>
+        <result column="patient_bed_num" property="patientBedNum" jdbcType="VARCHAR"/>
+        <result column="specimen_type" property="specimenType" jdbcType="VARCHAR"/>
+        <result column="outpat_service" property="outpatService" jdbcType="VARCHAR"/>
+        <result column="specimen_status" property="specimenStatus" jdbcType="VARCHAR"/>
+        <result column="sample_num" property="sampleNum" jdbcType="VARCHAR"/>
+        <result column="inspec_date" property="inspecDate" jdbcType="VARCHAR"/>
+        <result column="inspec_doctor" property="inspecDoctor" jdbcType="VARCHAR"/>
+        <result column="check_doctor" property="checkDoctor" jdbcType="VARCHAR"/>
+        <result column="check_report_date" property="checkReportDate" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="querySql">
+        a.patient_name AS 'patientName',
+        a.patient_sex AS 'patientSex',
+        a.patient_age AS 'patientAge',
+        a.patient_host_num AS 'patientHostNum',
+        a.inspec_depart AS 'inspecDepart',
+        a.patient_bed_num AS 'patientBedNum',
+        a.specimen_type AS 'specimenType',
+        a.outpat_service AS 'outpatService',
+        a.specimen_status AS 'specimenStatus',
+        a.sample_num AS 'sampleNum',
+        a.inspec_date AS 'inspecDate',
+        a.inspec_doctor AS 'inspecDoctor',
+        a.check_doctor AS 'checkDoctor',
+        a.check_report_date AS 'checkReportDate',
+        a.create_date AS 'createDate',
+        a.create_user_id AS 'createUserId'
+    </sql>
+
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT * from check_result where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.baixin.model.CheckResult" useGeneratedKeys="true" keyProperty="id">
+         INSERT INTO check_result (patient_name,patient_sex,patient_age,patient_host_num,inspec_depart,patient_bed_num,specimen_type,outpat_service,specimen_status,sample_num,inspec_date,inspec_doctor,check_doctor,check_report_date,create_date,create_user_id)
+         VALUE (
+            patient_name = #{patientName},
+            patient_sex = #{patientSex},
+            patient_age = #{patientAge},
+            patient_host_num = #{patientHostNum},
+            inspec_depart = #{inspecDepart},
+            patient_bed_num = #{patientBedNum},
+            specimen_type = #{specimenType},
+            outpat_service = #{outpatService},
+            specimen_status = #{specimenStatus},
+            sample_num = #{sampleNum},
+            inspec_date = #{inspecDate},
+            inspec_doctor = #{inspecDoctor},
+            check_doctor = #{checkDoctor},
+            check_report_date = #{checkReportDate},
+            create_date = #{createDate},
+            create_user_id = #{createUserId}
+          )
+    </insert>
+
+    <update id="update" parameterType="com.baixin.model.CheckResult">
+        UPDATE check_result SET
+        <if test="patientName != null">
+            patient_name = #{patientName},
+        </if>
+        <if test="patientSex != null">
+            patient_sex = #{patientSex},
+        </if>
+        <if test="patientAge != null">
+            patient_age = #{patientAge},
+        </if>
+        <if test="patientHostNum != null">
+            patient_host_num = #{patientHostNum},
+        </if>
+        <if test="inspecDepart != null">
+            inspec_depart = #{inspecDepart},
+        </if>
+        <if test="patientBedNum != null">
+            patient_bed_num = #{patientBedNum},
+        </if>
+        <if test="specimenType != null">
+            specimen_type = #{specimenType},
+        </if>
+        <if test="outpatService != null">
+            outpat_service = #{outpatService},
+        </if>
+        <if test="specimenStatus != null">
+            specimen_status = #{specimenStatus},
+        </if>
+        <if test="sampleNum != null">
+            sample_num = #{sampleNum},
+        </if>
+        <if test="inspecDate != null">
+            inspec_date = #{inspecDate},
+        </if>
+        <if test="inspecDoctor != null">
+            inspec_doctor = #{inspecDoctor},
+        </if>
+        <if test="checkDoctor != null">
+            check_doctor = #{checkDoctor},
+        </if>
+        <if test="checkReportDate != null">
+            check_report_date = #{checkReportDate},
+        </if>
+        <if test="createUserId != null">
+            create_user_id = #{createUserId}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <select id = "listPage" resultMap="BaseResultMap" parameterType = "Map">
+        SELECT
+        <include refid = "querySql"/>
+        FROM check_result a
+--         LEFT JOIN tb_user u ON a.create_user_id = u.id
+        WHERE 1 = 1
+        <if test="null != patientName and '' != patientName">
+            AND a.patient_name = #{patientName}
+        </if>
+        ORDER BY create_date desc
+        <if test="null != pageNum and '' != pageNum and null != pageSize and '' != pageSize">
+            limit ${(pageNum - 1) * pageSize}, ${pageSize}
+        </if>
+    </select>
+
+    <select id = "listPageCount" resultType = "java.lang.Integer" parameterType = "Map">
+        SELECT
+        COUNT(a.id)
+        FROM check_result a
+--         LEFT JOIN tb_user u ON a.create_user_id = u.id
+        WHERE 1 = 1
+        <if test="null != patientName and '' != patientName">
+            AND a.patient_name = #{patientName}
+        </if>
+    </select>
+
+</mapper>
