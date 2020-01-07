@@ -15,9 +15,11 @@ import java.util.Map;
 @Mapper
 public interface CheckResultMapper {
     
-    CheckResult findById(Integer id);
+    CheckResult findById(CheckResult checkResult);
     
     int insert(CheckResult checkResult);
+    
+    int update(CheckResult checkResult);
     
     /**
      * @desc 检验报告信息分页列表
@@ -31,4 +33,6 @@ public interface CheckResultMapper {
     List<CheckResult> listPage(Map<String, Object> paramMap);
     
     int listPageCount(Map<String, Object> paramMap);
+    
+    int deleteById(CheckResult checkResult);
 }

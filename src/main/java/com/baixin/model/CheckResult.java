@@ -68,6 +68,6 @@ public class CheckResult extends BaseObject {
     /**
      * 创建人ID
      */
-    private String createUserId;
+    private int createUserId;
     
 }

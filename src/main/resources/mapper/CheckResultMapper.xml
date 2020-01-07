@@ -22,6 +22,7 @@
     </resultMap>
 
     <sql id="querySql">
+        a.id AS 'id',
         a.patient_name AS 'patientName',
         a.patient_sex AS 'patientSex',
         a.patient_age AS 'patientAge',
@@ -47,22 +48,22 @@
     <insert id="insert" parameterType="com.baixin.model.CheckResult" useGeneratedKeys="true" keyProperty="id">
          INSERT INTO check_result (patient_name,patient_sex,patient_age,patient_host_num,inspec_depart,patient_bed_num,specimen_type,outpat_service,specimen_status,sample_num,inspec_date,inspec_doctor,check_doctor,check_report_date,create_date,create_user_id)
          VALUE (
-            patient_name = #{patientName},
-            patient_sex = #{patientSex},
-            patient_age = #{patientAge},
-            patient_host_num = #{patientHostNum},
-            inspec_depart = #{inspecDepart},
-            patient_bed_num = #{patientBedNum},
-            specimen_type = #{specimenType},
-            outpat_service = #{outpatService},
-            specimen_status = #{specimenStatus},
-            sample_num = #{sampleNum},
-            inspec_date = #{inspecDate},
-            inspec_doctor = #{inspecDoctor},
-            check_doctor = #{checkDoctor},
-            check_report_date = #{checkReportDate},
-            create_date = #{createDate},
-            create_user_id = #{createUserId}
+            #{patientName},
+            #{patientSex},
+            #{patientAge},
+            #{patientHostNum},
+            #{inspecDepart},
+            #{patientBedNum},
+            #{specimenType},
+            #{outpatService},
+            #{specimenStatus},
+            #{sampleNum},
+            #{inspecDate},
+            #{inspecDoctor},
+            #{checkDoctor},
+            #{checkReportDate},
+            now(),
+            #{createUserId}
           )
     </insert>
 
@@ -108,10 +109,7 @@
             check_doctor = #{checkDoctor},
         </if>
         <if test="checkReportDate != null">
-            check_report_date = #{checkReportDate},
-        </if>
-        <if test="createUserId != null">
-            create_user_id = #{createUserId}
+            check_report_date = #{checkReportDate}
         </if>
         WHERE id = #{id}
     </update>
@@ -141,5 +139,9 @@
             AND a.patient_name = #{patientName}
         </if>
     </select>
+
+    <delete id = "deleteById">
+        DELETE FROM check_result WHERE id = #{id}
+    </delete>
 
 </mapper>

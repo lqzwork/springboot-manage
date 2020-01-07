@@ -21,7 +21,7 @@
         <div class="border-bottom" th:include="header :: headerTop"></div>
         <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
             <div class="col-lg-10">
-                <h2>报告单管理</h2>
+                <h2>报告信息列表</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="#">首页</a>
@@ -133,8 +133,10 @@
                                         <td th:text="${checkResult.checkDoctor}">Onions</td>
                                         <td th:text="${checkResult.checkReportDate}">Onions</td>
                                         <td>
-                                            <a th:onclick="'javascript:updateNum('+${checkResult.id}+',2,1);'"
-                                               class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;买入</a>
+                                            <a th:href="@{'checkResultEdit?id='+${checkResult.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="#" th:onclick="'javascript:updateState('+${checkResult.id}+',2);'" title="删除">
+                                                <i class="fa fa-trash-o text-navy"></i></a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -198,7 +200,7 @@
         if (deleteTag) {
             $.ajax({
                 type: "POST",
-                url: "itemEditState?id=" + id,
+                url: "checkResultDelete?id=" + id,
                 contentType: "application/json; charset=utf-8",
                 success: function (msg) {
                     window.location.reload();

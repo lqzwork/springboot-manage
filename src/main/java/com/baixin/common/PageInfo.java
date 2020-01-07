@@ -15,7 +15,7 @@ import java.util.Map;
 public class PageInfo {
 
     private int totalSize;
-    public static int pageSize = 20;
+    public static int pageSize = 10;
     private int pageNum;
     private List<OperateLog> contentList;
     private List<CheckResult> contentList2;

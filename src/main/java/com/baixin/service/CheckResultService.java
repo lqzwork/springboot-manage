@@ -2,16 +2,12 @@ package com.baixin.service;
 
 import com.baixin.common.PageInfo;
 import com.baixin.mapper.CheckResultMapper;
-import com.baixin.mapper.OperateLogMapper;
 import com.baixin.model.CheckResult;
-import com.baixin.model.OperateLog;
-import com.baixin.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +24,10 @@ public class CheckResultService {
     @Autowired
     private CheckResultMapper checkResultMapper;
     
+    public CheckResult findById(CheckResult checkResult) {
+        return checkResultMapper.findById(checkResult);
+    }
+    
     /**
      * @desc 记录检验报告相关信息
      * @auther: liqz
@@ -35,9 +35,13 @@ public class CheckResultService {
      * @return: void
      * @date: 2020-01-06 16:34
      */
-    @Transactional
+    @Transactional(readOnly = false)
     public void saveCheckResult(CheckResult checkResult) {
-        checkResultMapper.insert(checkResult);
+        if(checkResult.getId() != 0) {
+            checkResultMapper.update(checkResult);
+        } else {
+            checkResultMapper.insert(checkResult);
+        }
     }
     
     /**
@@ -57,6 +61,10 @@ public class CheckResultService {
             listPage.setTotalSize(listPageCount);
         }
         return listPage;
+    }
+    
+    public int checkResultDelete (CheckResult checkResult) {
+        return checkResultMapper.deleteById(checkResult);
     }
     
 }

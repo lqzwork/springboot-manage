@@ -1,18 +1,23 @@
 package com.baixin.controller;
 
 import com.baixin.common.PageInfo;
-import com.baixin.model.CheckResult;
+import com.baixin.model.*;
 import com.baixin.service.CheckResultService;
 import com.baixin.service.OperateLogService;
+import com.baixin.util.Constant;
 import com.baixin.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -31,6 +36,24 @@ public class CheckResultController {
     @Autowired
     public CheckResultController(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
+    }
+    
+    @GetMapping("/user/checkResultEdit")
+    @Transactional
+    public String itemEditGet(Model model, CheckResult checkResult) {
+        if(checkResult.getId() != 0) {
+            CheckResult checkResult2 = checkResultService.findById(checkResult);
+            model.addAttribute("checkResult", checkResult2);
+        }
+        return "checks/checkResultEdit";
+    }
+    
+    @PostMapping("/user/checkResultEdit")
+    public String checkResultEditPost(Model model, HttpServletRequest request, CheckResult checkResult, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        checkResult.setCreateUserId(user.getId());
+        checkResultService.saveCheckResult(checkResult);
+        return "redirect:checkResultPage_0_0_0";
     }
     
     @RequestMapping("/user/checkResultPage_{pageCurrent}_{pageSize}_{pageCount}")
@@ -52,5 +75,14 @@ public class CheckResultController {
         model.addAttribute("pageHTML", pageHTML);
         model.addAttribute("checkResult", checkResult);
         return "checks/checkResultPage";
+    }
+    
+    @ResponseBody
+    @PostMapping("/user/checkResultDelete")
+    @Transactional
+    public ResObject<Object> checkResultDelete(CheckResult checkResult, HttpSession httpSession) {
+        checkResultService.checkResultDelete(checkResult);
+        ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
+        return object;
     }
 }

@@ -29,19 +29,19 @@
         <div class="border-bottom" th:include="header :: headerTop"></div>
         <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
             <div class="col-lg-10">
-                <h2>药品管理</h2>
+                <h2>报告信息新增或修改</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="#">首页</a>
                     </li>
                     <li>
-                        <a>药品管理</a>
+                        <a>报告单管理</a>
                     </li>
                     <li>
-                        <a>药品管理</a>
+                        <a>报告信息</a>
                     </li>
                     <li class="active">
-                        <strong>药品新增或修改</strong>
+                        <strong>新增或修改</strong>
                     </li>
                 </ol>
             </div>
@@ -53,7 +53,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>新增或修改药品</h5>
+                            <h5>新增或修改报告信息</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -61,83 +61,110 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-                            <form id="formTag" action="itemEdit" method="POST" class="form-horizontal"
+                            <form id="formTag" action="checkResultEdit" method="POST" class="form-horizontal"
                                   enctype="multipart/form-data">
 
                                 <input id="id" name="id" readonly="readonly" type="hidden"
                                        class="form-control"
-                                       th:value="${item.id}"/>
+                                       th:value="${checkResult.id}"/>
                                 <div class="hr-line-dashed"></div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">药品名称：</label>
-                                    <div class="col-sm-10">
-                                        <input id="title" name="title" type="text" class="form-control"
-                                               th:value="${item.title}"/>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">患者姓名：</label>
+                                    <div class="col-sm-3">
+                                        <input id="patientName" name="patientName" type="text" class="form-control"
+                                               th:value="${checkResult.patientName}"/>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">患者性别：</label>
+                                    <div class="col-sm-3">
+                                        <input id="patientSex" name="patientSex" type="text" class="form-control"
+                                               th:value="${checkResult.patientSex}"/>
                                     </div>
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">供应商/产地：</label>
-                                    <div class="col-sm-10">
-                                        <input id="supplier" name="supplier" type="text" class="form-control"
-                                               th:value="${item.supplier}"/>
+                                <!--<div class="hr-line-dashed"></div>-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">患者年龄：</label>
+                                    <div class="col-sm-3">
+                                        <input id="patientAge" name="patientAge" type="text" class="form-control"
+                                               th:value="${checkResult.patientAge}"/>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">患者住院号：</label>
+                                    <div class="col-sm-3">
+                                        <input id="patientHostNum" name="patientHostNum" type="text" class="form-control"
+                                               th:value="${checkResult.patientHostNum}"/>
                                     </div>
                                 </div>
 
-                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">送检科室：</label>
+                                    <div class="col-sm-3">
+                                        <input id="inspecDepart" name="inspecDepart" type="text" class="form-control"
+                                               th:value="${checkResult.inspecDepart}"/>
+                                    </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">分类：</label>
-                                    <div class="col-sm-10">
-                                        <select name="cid" id="cid" class="form-control">
-                                            <option value="0">--请选择药品分类--</option>
-                                            <option th:each="ic : ${itemCategoryList}" th:value="${ic.id}"
-                                                    th:text="${ic.name}" th:selected="${item.cid==ic.id}">分类
-                                            </option>
-                                        </select>
+                                    <label class="col-sm-2 control-label">床号：</label>
+                                    <div class="col-sm-3">
+                                        <input id="patientBedNum" name="patientBedNum" type="text" class="form-control"
+                                               th:value="${checkResult.patientBedNum}"/>
                                     </div>
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">卖点：</label>
-                                    <div class="col-sm-10">
-                                        <textarea id="sellPoint" name="sellPoint" class="form-control" rows="2"
-                                                  th:text="${item.sellPoint}"></textarea>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标本类型：</label>
+                                    <div class="col-sm-3">
+                                        <input id="specimenType" name="specimenType" type="text" class="form-control"
+                                               th:value="${checkResult.specimenType}"/>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">门诊号：</label>
+                                    <div class="col-sm-3">
+                                        <input id="outpatService" name="outpatService" type="text" class="form-control"
+                                               th:value="${checkResult.outpatService}"/>
                                     </div>
                                 </div>
 
-                                <div class="hr-line-dashed"></div>
-
-                                <div class="form-group"><label class="col-sm-2 control-label">规格：</label>
-                                    <div class="col-sm-10">
-                                        <input id="norm" name="norm" type="text" class="form-control"
-                                               th:value="${item.norm}"/>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标本状态：</label>
+                                    <div class="col-sm-3">
+                                        <input id="specimenStatus" name="specimenStatus" type="text" class="form-control"
+                                               th:value="${checkResult.specimenStatus}"/>
                                     </div>
-                                </div>
-                                <div class="form-group"><label class="col-sm-2 control-label">单位：</label>
-                                    <div class="col-sm-10">
-                                        <input id="unit" name="unit" type="text" class="form-control"
-                                               th:value="${item.unit}"/>
-                                    </div>
-                                </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">进价：</label>
-                                    <div class="col-sm-10">
-                                        <input id="price" name="price" type="text" class="form-control"
-                                               th:value="${item.price}"/>
+                                    <label class="col-sm-2 control-label">样本号：</label>
+                                    <div class="col-sm-3">
+                                        <input id="sampleNum" name="sampleNum" type="text" class="form-control"
+                                               th:value="${checkResult.sampleNum}"/>
                                     </div>
                                 </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">售价：</label>
-                                    <div class="col-sm-10">
-                                        <input id="sellPrice" name="sellPrice" type="text" class="form-control"
-                                               th:value="${item.sellPrice}"/>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">送检日期：</label>
+                                    <div class="col-sm-3">
+                                        <input id="inspecDate" name="inspecDate" type="text" class="form-control"
+                                               th:value="${checkResult.inspecDate}"/>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">送检医师：</label>
+                                    <div class="col-sm-3">
+                                        <input id="inspecDoctor" name="inspecDoctor" type="text" class="form-control"
+                                               th:value="${checkResult.inspecDoctor}"/>
                                     </div>
                                 </div>
 
-                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">检验师：</label>
+                                    <div class="col-sm-3">
+                                        <input id="checkDoctor" name="checkDoctor" type="text" class="form-control"
+                                               th:value="${checkResult.checkDoctor}"/>
+                                    </div>
 
-                                <div class="form-group"><label class="col-sm-2 control-label">库存：</label>
-                                    <div class="col-sm-10">
-                                        <input id="num" name="num" type="text" class="form-control"
-                                               th:value="${item.num}"/>
+                                    <label class="col-sm-2 control-label">报告时间：</label>
+                                    <div class="col-sm-3">
+                                        <input id="checkReportDate" name="checkReportDate" type="text" class="form-control"
+                                               th:value="${checkResult.checkReportDate}"/>
                                     </div>
                                 </div>
 
@@ -183,23 +210,6 @@
 <!-- SUMMERNOTE -->
 <script th:src="@{/js/plugins/summernote/summernote.min.js}"></script>
 
-
-<script th:inline="javascript">
-    var image = [[${item.image}]];
-    $(document).ready(function () {
-        if (image == null || image == "") {
-            $("#imageCell").hide();
-            $("#imputCell").show();
-        } else {
-            $("#imageCell").show();
-            $("#imputCell").hide();
-        }
-        $("#imageCellBut").click(function () {
-            $("#imageCell").hide();
-            $("#imputCell").show();
-        });
-    });
-</script>
 <script th:inline="javascript">
     $(document).ready(function () {
         //初始化编辑器
@@ -216,20 +226,20 @@
 
         //提交
         $("#submitButton").click(function () {
-            if ($("#title").val() == "") {
-                toastr.error('请输入药品名称', '提示');
+            if ($("#patientName").val() == "") {
+                toastr.error('患者姓名', '提示');
                 return;
             }
-            if ($("#category").val() == 0) {
-                toastr.error('请选择药品分类', '提示');
+            if ($("#patientHostNum").val() == 0) {
+                toastr.error('患者住院号', '提示');
                 return;
             }
-            if ($("#price").val() == 0) {
-                toastr.error('请输入药品价格', '提示');
+            if ($("#patientBedNum").val() == 0) {
+                toastr.error('床号', '提示');
                 return;
             }
-            if ($("#num").val() == 0) {
-                toastr.error('请输入库存数量', '提示');
+            if ($("#sampleNum").val() == 0) {
+                toastr.error('样本号', '提示');
                 return;
             }
             $("#formTag").submit();
