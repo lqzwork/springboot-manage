@@ -3,11 +3,18 @@ package com.baixin.service;
 import com.baixin.common.PageInfo;
 import com.baixin.mapper.CheckResultMapper;
 import com.baixin.model.CheckResult;
+import com.baixin.util.WordUtil;
+import com.spire.doc.Document;
+import com.spire.doc.FileFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -63,8 +70,30 @@ public class CheckResultService {
         return listPage;
     }
     
-    public int checkResultDelete (CheckResult checkResult) {
+    public int checkResultDelete(CheckResult checkResult) {
         return checkResultMapper.deleteById(checkResult);
+    }
+    
+    public void detailCheckReports(int checkResultId, MultipartFile[] files) {
+        if(0 != checkResultId && null != files && files.length > 0) {
+            CheckResult checkResult = checkResultMapper.findById(new CheckResult(checkResultId));
+            // File direc = new File("/Users/liqingzheng/Documents/result");
+            File direc = new File("D:/result");
+            if(!direc.exists()) {
+                direc.mkdirs();
+            }
+            for(MultipartFile file : files) {
+                try {
+                    InputStream inputStream = file.getInputStream();
+                    Document document = WordUtil.process(inputStream, checkResult);
+                    //保存文档
+                    document.saveToFile(direc.getPath() + "/" + checkResult.getPatientName() + "_" +file.getOriginalFilename(),
+                            FileFormat.Docx_2010);
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     
 }

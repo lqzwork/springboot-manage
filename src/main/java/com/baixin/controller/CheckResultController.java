@@ -92,7 +92,7 @@ public class CheckResultController {
     @Transactional
     public String detailCheckReports(@RequestParam("checkResultId") int checkResultId,@RequestParam("files") MultipartFile[] files,
                                      HttpSession httpSession) {
-        System.out.println(checkResultId + " " + files.length);
+        checkResultService.detailCheckReports(checkResultId,files);
         return "redirect:checkResultPage_0_0_0";
     }
     

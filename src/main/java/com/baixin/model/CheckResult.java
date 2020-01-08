@@ -1,9 +1,15 @@
 package com.baixin.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.apache.ibatis.annotations.ConstructorArgs;
 
 @Data
+@NoArgsConstructor
 public class CheckResult extends BaseObject {
+    public CheckResult (int id) {
+        this.id = id;
+    }
     private int id;
     /**
      * 患者姓名
