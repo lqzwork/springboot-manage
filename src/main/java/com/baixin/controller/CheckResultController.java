@@ -87,7 +87,6 @@ public class CheckResultController {
         return object;
     }
     
-    @ResponseBody
     @PostMapping("/user/detailCheckReports")
     @Transactional
     public String detailCheckReports(@RequestParam("checkResultId") int checkResultId,@RequestParam("files") MultipartFile[] files,
