@@ -57,6 +57,15 @@ public class CheckResultController {
         return "redirect:checkResultPage_0_0_0";
     }
     
+    /**
+     * @desc 分页列表
+     *
+     * @auther: liqz
+     * @param: [checkResult, pageCurrent, pageSize, pageCount, model]
+     * @return: java.lang.String
+     * @date: 2020-01-08 14:41
+     *
+     */
     @RequestMapping("/user/checkResultPage_{pageCurrent}_{pageSize}_{pageCount}")
     public String listCheckResultPage_(CheckResult checkResult, @PathVariable Integer pageCurrent,
                                      @PathVariable Integer pageSize, @PathVariable Integer pageCount, Model model) {
@@ -78,6 +87,15 @@ public class CheckResultController {
         return "checks/checkResultPage";
     }
     
+    /**
+     * @desc 删除操作
+     *
+     * @auther: liqz
+     * @param: [checkResult, httpSession]
+     * @return: com.baixin.model.ResObject<java.lang.Object>
+     * @date: 2020-01-08 14:41
+     *
+     */
     @ResponseBody
     @PostMapping("/user/checkResultDelete")
     @Transactional
@@ -87,6 +105,15 @@ public class CheckResultController {
         return object;
     }
     
+    /**
+     * @desc 替换word中指定文本
+     *
+     * @auther: liqz
+     * @param: [checkResultId, files, httpSession]
+     * @return: java.lang.String
+     * @date: 2020-01-08 14:40
+     *
+     */
     @PostMapping("/user/detailCheckReports")
     @Transactional
     public String detailCheckReports(@RequestParam("checkResultId") int checkResultId,@RequestParam("files") MultipartFile[] files,

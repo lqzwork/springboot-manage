@@ -74,6 +74,15 @@ public class CheckResultService {
         return checkResultMapper.deleteById(checkResult);
     }
     
+    /**
+     * @desc 替换word中指定文本
+     *
+     * @auther: liqz
+     * @param: [checkResultId, files]
+     * @return: void
+     * @date: 2020-01-08 14:40
+     *
+     */
     public void detailCheckReports(int checkResultId, MultipartFile[] files) {
         if(0 != checkResultId && null != files && files.length > 0) {
             CheckResult checkResult = checkResultMapper.findById(new CheckResult(checkResultId));
@@ -82,13 +91,15 @@ public class CheckResultService {
             if(!direc.exists()) {
                 direc.mkdirs();
             }
+            File resultFile = null;
             for(MultipartFile file : files) {
                 try {
                     InputStream inputStream = file.getInputStream();
                     Document document = WordUtil.process(inputStream, checkResult);
+                    resultFile = new File(direc.getPath() + "/" + checkResult.getPatientName() + "_" +file.getOriginalFilename());
+                    resultFile.deleteOnExit();//先删除存在的文件
                     //保存文档
-                    document.saveToFile(direc.getPath() + "/" + checkResult.getPatientName() + "_" +file.getOriginalFilename(),
-                            FileFormat.Docx_2010);
+                    document.saveToFile(resultFile.getAbsolutePath(), FileFormat.Docx_2010);
                 } catch(IOException e) {
                     e.printStackTrace();
                 }
