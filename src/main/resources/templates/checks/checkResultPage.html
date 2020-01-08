@@ -103,7 +103,7 @@
                                         <th width="4%">年龄</th>
                                         <th width="5%">住院号</th>
                                         <th width="7%">送检科室</th>
-                                        <th th:if="${session.user.getHeadPicture() == 'admin'}" width="7%">床号</th>
+                                        <th width="7%">床号</th>
                                         <th width="7%">标本类型</th>
                                         <th width="5%">门诊号</th>
                                         <th width="7%">标本状态</th>
@@ -135,8 +135,12 @@
                                         <td>
                                             <a th:href="@{'checkResultEdit?id='+${checkResult.id}}" title="修改"><i class="fa fa-edit text-navy"></i></a>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="#" th:onclick="'javascript:updateState('+${checkResult.id}+',2);'" title="删除">
+                                            <a href="#" th:onclick="'javascript:checkResultDelete('+${checkResult.id}+',2);'" title="删除">
                                                 <i class="fa fa-trash-o text-navy"></i></a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="#" th:onclick="'javascript:setId('+${checkResult.id}+');'"
+                                               title="文件处理"  data-toggle="modal" data-target="#receivables">
+                                                <i class="fa fa-file-word-o text-navy"></i></a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -157,7 +161,33 @@
         <div class="footer" th:include="footer :: copyright"></div>
     </div>
 </div>
-
+<!-- 报告单处理模态框 -->
+<div class="modal fade" id="receivables" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel4">报告单处理</h4>
+            </div>
+            <div class="modal-body">
+                <form action="detailCheckReports" method="post" id="checkResult_form"  enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">文件：</label>
+                            <input id="files" type="file" multiple name="files" value="上传"/>
+                            <input id="checkResultId" name="checkResultId" type="text" th:hidden="true"/>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" onclick="detailCheckReports()" class="btn btn-primary">处理</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Mainly scripts -->
 <script th:src="@{/js/jquery-2.1.1.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -190,7 +220,7 @@
     });
 
     /*<![CDATA[*/
-    function updateState(id, state, commendState) {
+    function checkResultDelete(id, state, commendState) {
         var deleteTag;
         if (state == 2) {
             deleteTag = confirm("确定删除此条信息?");
@@ -212,45 +242,12 @@
         }
     }
 
-    function updateNum(id, state, commendState) {
-        var deleteTag;
-        var num = $("#" + id + "num").val();
-        var totalNum = $("#" + id + "totalNum").text();
+    function setId(id) {
+        $("#checkResultId").val(id);
+    }
 
-        if (null == num || num <= 0) {
-            alert("药品操作数量异常，应该大于0");
-            $("#" + id + "num").val(1);
-            return;
-        }
-        if (commendState == 1) {
-            deleteTag = confirm("确定要买入该药品，买入数量为" + num + "？");
-        } else if (commendState == -1) {
-            if(num - totalNum > 0) {
-                alert("卖出数量不能大于剩余库存量，最大可卖出" + totalNum);
-                $("#" + id + "num").val(totalNum);
-                return;
-            }else {
-                deleteTag = confirm("确定要卖出该药品，卖出数量为" + num + "？");
-            }
-        } else {
-            deleteTag = true;
-        }
-        if (commendState == -1) {
-            num = num * (-1);
-        }
-        if (deleteTag) {
-            $.ajax({
-                type: "POST",
-                url: "itemEditNum?id=" + id + "&num=" + num,
-                contentType: "application/json; charset=utf-8",
-                success: function (msg) {
-                    window.location.reload();
-                },
-                error: function () {
-                    alert("系统异常！");
-                }
-            });
-        }
+    function detailCheckReports() {
+        $("#checkResult_form").submit();
     }
 
     /*]]>*/

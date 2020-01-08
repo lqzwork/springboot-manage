@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -85,4 +86,14 @@ public class CheckResultController {
         ResObject<Object> object = new ResObject<Object>(Constant.Code01, Constant.Msg01, null, null);
         return object;
     }
+    
+    @ResponseBody
+    @PostMapping("/user/detailCheckReports")
+    @Transactional
+    public String detailCheckReports(@RequestParam("checkResultId") int checkResultId,@RequestParam("files") MultipartFile[] files,
+                                     HttpSession httpSession) {
+        System.out.println(checkResultId + " " + files.length);
+        return "redirect:checkResultPage_0_0_0";
+    }
+    
 }
