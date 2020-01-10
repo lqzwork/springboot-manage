@@ -3,7 +3,9 @@ package com.baixin.service;
 import com.baixin.common.PageInfo;
 import com.baixin.mapper.CheckResultMapper;
 import com.baixin.model.CheckResult;
+import com.baixin.properties.ConfigProperties;
 import com.baixin.util.WordUtil;
+import com.baixin.util.ZipUtil;
 import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +33,9 @@ public class CheckResultService {
     
     @Autowired
     private CheckResultMapper checkResultMapper;
+    
+    @Autowired
+    private ConfigProperties configProperties;
     
     public CheckResult findById(CheckResult checkResult) {
         return checkResultMapper.findById(checkResult);
@@ -76,35 +82,47 @@ public class CheckResultService {
     
     /**
      * @desc 替换word中指定文本
-     *
      * @auther: liqz
      * @param: [checkResultId, files]
      * @return: void
      * @date: 2020-01-08 14:40
-     *
      */
-    public void detailCheckReports(int checkResultId, MultipartFile[] files) {
+    public File detailCheckReports(int checkResultId, MultipartFile[] files) {
+        File zipFiles = null;
         if(0 != checkResultId && null != files && files.length > 0) {
             CheckResult checkResult = checkResultMapper.findById(new CheckResult(checkResultId));
-            // File direc = new File("/Users/liqingzheng/Documents/result");
-            File direc = new File("D:/result");
+            File direc = new File(configProperties.getToPath());
             if(!direc.exists()) {
                 direc.mkdirs();
             }
-            File resultFile = null;
-            for(MultipartFile file : files) {
-                try {
+            try {
+                File resultFile = null;
+                List<Map<String, Object>> fileEntrys = new ArrayList<>();
+                Map<String, Object> map = null;
+                for(MultipartFile file : files) {
+                    map = new HashMap<>();
+                    
                     InputStream inputStream = file.getInputStream();
+                    //替换文本并返回最新文档
                     Document document = WordUtil.process(inputStream, checkResult);
-                    resultFile = new File(direc.getPath() + "/" + checkResult.getPatientName() + "_" +file.getOriginalFilename());
+                    resultFile =
+                            new File(configProperties.getToPath() + checkResult.getPatientName() + "_" + file.getOriginalFilename());
                     resultFile.deleteOnExit();//先删除存在的文件
                     //保存文档
                     document.saveToFile(resultFile.getAbsolutePath(), FileFormat.Docx_2010);
-                } catch(IOException e) {
-                    e.printStackTrace();
+                    map.put("fullPahth", resultFile.getAbsolutePath());
+                    map.put("originalFileName", resultFile.getName());
+                    fileEntrys.add(map);
+                    
                 }
+                zipFiles = ZipUtil.zipFiles(fileEntrys, configProperties.getToPath(),
+                        checkResult.getPatientName() + "_" + configProperties.getZipName());
+                System.out.println(configProperties.getZipName() + "6666666");
+            } catch(Exception e) {
+                e.printStackTrace();
             }
         }
+        return zipFiles;
     }
     
 }
