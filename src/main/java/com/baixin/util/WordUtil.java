@@ -12,7 +12,7 @@ import java.io.InputStream;
  * @Date: 2020-01-06 14:04
  **/
 public class WordUtil {
-    public static Document process(InputStream inputStream, CheckResult checkResult) {
+    public static Document process(InputStream inputStream, CheckResult checkResult, String fileName) {
         //加载测试文档
         Document doc = new Document(inputStream);
         //如只需替换文档中的第一个指定文本，替换前先调用以下方法，再进行下一步代码
@@ -24,7 +24,8 @@ public class WordUtil {
         doc.replace("住院号:", "住院号:" + checkResult.getPatientHostNum(), true, true);
         doc.replace("送检科室:", "送检科室:" + checkResult.getInspecDepart(), true, true);
         doc.replace("床号:", "床号:" + checkResult.getPatientBedNum(), true, true);
-        doc.replace("标本类型:", "标本类型:" + checkResult.getSpecimenType(), true, true);
+        // doc.replace("标本类型:", "标本类型:" + checkResult.getSpecimenType(), true, true);
+        doc.replace("标本类型:", "标本类型:" + (fileName.contains("尿") == true ? "尿液":checkResult.getSpecimenType()), true, true);
         doc.replace("门诊号:", "门诊号:" + checkResult.getOutpatService(), true, true);
         doc.replace("标本状态:", "标本状态:" + checkResult.getSpecimenStatus(), true, true);
         doc.replace("样本号:", "样本号:" + checkResult.getSampleNum(), true, true);
@@ -39,7 +40,8 @@ public class WordUtil {
         doc.replace("住院号：", "住院号:" + checkResult.getPatientHostNum(), true, true);
         doc.replace("送检科室：", "送检科室:" + checkResult.getInspecDepart(), true, true);
         doc.replace("床号：", "床号:" + checkResult.getPatientBedNum(), true, true);
-        doc.replace("标本类型：", "标本类型:" + checkResult.getSpecimenType(), true, true);
+        // doc.replace("标本类型：", "标本类型:" + checkResult.getSpecimenType(), true, true);
+        doc.replace("标本类型：", "标本类型:" + (fileName.contains("尿") == true ? "尿液":checkResult.getSpecimenType()), true, true);
         doc.replace("门诊号：", "门诊号:" + checkResult.getOutpatService(), true, true);
         doc.replace("标本状态：", "标本状态:" + checkResult.getSpecimenStatus(), true, true);
         doc.replace("样本号：", "样本号:" + checkResult.getSampleNum(), true, true);

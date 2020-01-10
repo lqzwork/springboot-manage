@@ -4,6 +4,7 @@ import com.baixin.common.PageInfo;
 import com.baixin.mapper.CheckResultMapper;
 import com.baixin.model.CheckResult;
 import com.baixin.properties.ConfigProperties;
+import com.baixin.util.PinYinUtil;
 import com.baixin.util.WordUtil;
 import com.baixin.util.ZipUtil;
 import com.spire.doc.Document;
@@ -104,7 +105,7 @@ public class CheckResultService {
                     
                     InputStream inputStream = file.getInputStream();
                     //替换文本并返回最新文档
-                    Document document = WordUtil.process(inputStream, checkResult);
+                    Document document = WordUtil.process(inputStream, checkResult, file.getOriginalFilename());
                     resultFile =
                             new File(configProperties.getToPath() + checkResult.getPatientName() + "_" + file.getOriginalFilename());
                     resultFile.deleteOnExit();//先删除存在的文件
@@ -116,8 +117,7 @@ public class CheckResultService {
                     
                 }
                 zipFiles = ZipUtil.zipFiles(fileEntrys, configProperties.getToPath(),
-                        checkResult.getPatientName() + "_" + configProperties.getZipName());
-                System.out.println(configProperties.getZipName() + "6666666");
+                        PinYinUtil.ToPinyin(checkResult.getPatientName()) + "_" + configProperties.getZipName());
             } catch(Exception e) {
                 e.printStackTrace();
             }
