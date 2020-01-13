@@ -182,7 +182,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="reFreshList()" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" onclick="refreshList()" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" onclick="detailCheckReports()" class="btn btn-primary">处理</button>
             </div>
         </div>
@@ -248,23 +248,29 @@
 
     function detailCheckReports() {
         $("#checkResult_form").submit();//直接提交
-        // $.ajax({
-        //     type: "POST",
-        //     dataType: "json",
-        //     contentType: "application/json; charset=utf-8",
-        //     url: 'detailCheckReportsZip?checkResultId=' + $("#checkResultId").val(),
-        //     data: $("#checkResult_form").serialize(),
-        //     success: function (data) {
-        //         alert("666")
-        //         window.location.reload();
-        //     },
-        //     error: function(data) {
-        //         alert("error:"+data.responseText);
-        //     }
-        // });
     }
 
-    function reFreshList() {
+    //ajax 提交form表单，多文件上传
+    function detailCheckReportsAjax() {
+        var formData = new FormData($("#checkResult_form")[0]);
+        $.ajax({
+            url: 'detailCheckReportsZip',
+            type: 'post',
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            data: formData,
+
+            success: function (data) {
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("error:" + data.responseText);
+            }
+        });
+    }
+
+    function refreshList() {
         window.location.reload();
     }
 </script>
