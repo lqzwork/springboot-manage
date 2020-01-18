@@ -36,7 +36,7 @@ public class CheckResult extends BaseObject {
      */
     private String patientBedNum;
     /**
-     * 标本类型
+     * 临床诊断
      */
     private String specimenType;
     /**

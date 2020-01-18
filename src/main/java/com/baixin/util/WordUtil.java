@@ -24,12 +24,12 @@ public class WordUtil {
         doc.replace("住院号:", "住院号:" + checkResult.getPatientHostNum(), true, true);
         doc.replace("送检科室:", "送检科室:" + checkResult.getInspecDepart(), true, true);
         doc.replace("床号:", "床号:" + checkResult.getPatientBedNum(), true, true);
-        // doc.replace("标本类型:", "标本类型:" + checkResult.getSpecimenType(), true, true);
         // doc.replace("标本类型:", "标本类型:" + (fileName.contains("尿") == true ? "尿液":checkResult.getSpecimenType()), true, true);
         doc.replace("门诊号:", "门诊号:" + checkResult.getOutpatService(), true, true);
         doc.replace("标本状态:", "标本状态:" + checkResult.getSpecimenStatus(), true, true);
         doc.replace("样本号:", "样本号:" + checkResult.getSampleNum(), true, true);
         doc.replace("送检日期:", "送检日期:" + checkResult.getInspecDate(), true, true);
+        doc.replace("临床诊断:", "临床诊断:" + checkResult.getSpecimenType(), true, true);
         doc.replace("送检医师:", "送检医师:" + checkResult.getInspecDoctor(), true, true);
         doc.replace("检验师:", "检验师:" + checkResult.getCheckDoctor(),true, true);
         doc.replace("报告时间:", "报告时间:" + checkResult.getCheckReportDate(), true, true);
@@ -40,12 +40,12 @@ public class WordUtil {
         doc.replace("住院号：", "住院号:" + checkResult.getPatientHostNum(), true, true);
         doc.replace("送检科室：", "送检科室:" + checkResult.getInspecDepart(), true, true);
         doc.replace("床号：", "床号:" + checkResult.getPatientBedNum(), true, true);
-        // doc.replace("标本类型：", "标本类型:" + checkResult.getSpecimenType(), true, true);
         // doc.replace("标本类型：", "标本类型:" + (fileName.contains("尿") == true ? "尿液":checkResult.getSpecimenType()), true, true);
         doc.replace("门诊号：", "门诊号:" + checkResult.getOutpatService(), true, true);
         doc.replace("标本状态：", "标本状态:" + checkResult.getSpecimenStatus(), true, true);
         doc.replace("样本号：", "样本号:" + checkResult.getSampleNum(), true, true);
         doc.replace("送检日期：", "送检日期:" + checkResult.getInspecDate(), true, true);
+        doc.replace("临床诊断：", "临床诊断:" + checkResult.getSpecimenType(), true, true);
         doc.replace("送检医师：", "送检医师:" + checkResult.getInspecDoctor(), true, true);
         doc.replace("检验师：", "检验师:" + checkResult.getCheckDoctor(),true, true);
         doc.replace("报告时间：", "报告时间:" + checkResult.getCheckReportDate(), true, true);
