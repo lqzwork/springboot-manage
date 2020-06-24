@@ -34,14 +34,14 @@
 //     }
 //
 //     /**
-//      * @param file                                                                     ：文件，File类型
+//      * @param files                                                                     ：文件，File类型
 //      * @param id                                                                       ：唯一标示文件，可根据id查询到文件.必须设置
 //
 //      * @param map：放入你想要保存的属性，例如文件类型（“congtentType”".jpg"）,字符串类型，区分大小写，如果属性没有的话会自动创建并保存
 //      * @MethodName    : uploadFile
 //      * @Description    : 上传文件
 //      */
-//     public void uploadFile(File file, String id, LinkedHashMap<String, Object> map) {
+//     public void uploadFile(File files, String id, LinkedHashMap<String, Object> map) {
 //         //把mongoDB的数据库地址配置在外部。
 //         try {
 //             //获取链接，并定位数据库信息
@@ -51,7 +51,7 @@
 //             GridFS gridFS = new GridFS(db, collectionName);
 //
 //             // 创建gridfsfile文件
-//             GridFSFile gridFSFile = gridFS.createFile(file);
+//             GridFSFile gridFSFile = gridFS.createFile(files);
 //             //判断是否已经存在文件，如果存在则先删除
 //             GridFSDBFile gridFSDBFile = getFileById(id);
 //             if (gridFSDBFile != null) {

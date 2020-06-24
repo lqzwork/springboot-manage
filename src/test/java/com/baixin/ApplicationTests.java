@@ -18,7 +18,7 @@ public class ApplicationTests {
 
 	@Test
 	public void saveFileTest() throws  Exception{
-//		FileInputStream file = new FileInputStream("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static/img/qq.jpg");
+//		FileInputStream files = new FileInputStream("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static/img/qq.jpg");
 
 	}
 

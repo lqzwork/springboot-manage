@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "check.file")
+@ConfigurationProperties(prefix = "check.files")
 public class ConfigProperties {
     /**
      * 打包后名称

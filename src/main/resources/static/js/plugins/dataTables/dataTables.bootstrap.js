@@ -6,7 +6,7 @@
  * DataTables integration for Bootstrap 3. This requires Bootstrap 3 and
  * DataTables 1.10 or newer.
  *
- * This file sets the defaults and adds options to DataTables to style its
+ * This files sets the defaults and adds options to DataTables to style its
  * controls using Bootstrap. See http://datatables.net/manual/styling/bootstrap
  * for further information.
  */

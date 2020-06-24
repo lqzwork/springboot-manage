@@ -177,7 +177,7 @@ public class ItemController {
     @ResponseBody
     public ResponseEntity<?> getFile() {
         try {
-            return ResponseEntity.ok(resourceLoader.getResource("file:" + Paths.get(ROOT, imageName).toString()));
+            return ResponseEntity.ok(resourceLoader.getResource("files:" + Paths.get(ROOT, imageName).toString()));
         } catch(Exception e) {
             return ResponseEntity.notFound().build();
         }

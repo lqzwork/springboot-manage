@@ -6,7 +6,7 @@ public class MongoUtilTest {
     @Test
     public void uploadFileTest() {
         // MongoUtil mongoUtil = new MongoUtil();
-        // File file = new File("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static
+        // File files = new File("/Users/liqingzheng/Job_work/Idea_Work/springboot-manage/src/main/resources/static
         // /img/cat.jpg");
         // String id = UUID.randomUUID().toString().replaceAll("-", "");
         //
@@ -16,7 +16,7 @@ public class MongoUtilTest {
         // metaMap.put("_id",id);
         //
         //
-        // mongoUtil.uploadFile(file,id,metaMap);
+        // mongoUtil.uploadFile(files,id,metaMap);
         // System.out.println("Upload File Success");
     }
     
@@ -51,9 +51,9 @@ public class MongoUtilTest {
         // String dbName = "baixin";
         // String collectionName = "myimage";
         // List<GridFSDBFile> files = mongoUtil.getAllFile();
-        // for (GridFSDBFile file:files) {
-        //     //file.writeTo(new File("${path}"))
-        //     System.out.println(file.getId() + ":" + file.getFilename());
+        // for (GridFSDBFile files:files) {
+        //     //files.writeTo(new File("${path}"))
+        //     System.out.println(files.getId() + ":" + files.getFilename());
         // }
         // System.out.println("get All File Sucess!!");
     }

@@ -310,14 +310,14 @@
                     addRemoveLinks: false,
                     previewsContainer: null,
                     dictDefaultMessage: "Drop files here to upload",
-                    dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
+                    dictFallbackMessage: "Your browser does not support drag'n'drop files uploads.",
                     dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
                     dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
                     dictInvalidFileType: "You can't upload files of this type.",
                     dictResponseError: "Server responded with {{statusCode}} code.",
                     dictCancelUpload: "Cancel upload",
                     dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
-                    dictRemoveFile: "Remove file",
+                    dictRemoveFile: "Remove files",
                     dictRemoveFileConfirmation: null,
                     dictMaxFilesExceeded: "You can not upload any more files.",
                     accept: function(file, done) {
@@ -462,7 +462,7 @@
                     },
                     thumbnail: function(file, dataUrl) {
                         var thumbnailElement, _i, _len, _ref, _results;
-                        file.previewElement.classList.remove("dz-file-preview");
+                        file.previewElement.classList.remove("dz-files-preview");
                         file.previewElement.classList.add("dz-image-preview");
                         _ref = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
                         _results = [];
@@ -524,7 +524,7 @@
                     completemultiple: noop,
                     maxfilesexceeded: noop,
                     maxfilesreached: noop,
-                    previewTemplate: "<div class=\"dz-preview dz-file-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-success-mark\"><span>✔</span></div>\n  <div class=\"dz-error-mark\"><span>✘</span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
+                    previewTemplate: "<div class=\"dz-preview dz-files-preview\">\n  <div class=\"dz-details\">\n    <div class=\"dz-filename\"><span data-dz-name></span></div>\n    <div class=\"dz-size\" data-dz-size></div>\n    <img data-dz-thumbnail />\n  </div>\n  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>\n  <div class=\"dz-success-mark\"><span>✔</span></div>\n  <div class=\"dz-error-mark\"><span>✘</span></div>\n  <div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n</div>"
                 };
 
                 extend = function() {
@@ -842,7 +842,7 @@
                     if (this.options.dictFallbackText) {
                         fieldsString += "<p>" + this.options.dictFallbackText + "</p>";
                     }
-                    fieldsString += "<input type=\"file\" name=\"" + this.options.paramName + (this.options.uploadMultiple ? "[]" : "") + "\" " + (this.options.uploadMultiple ? 'multiple="multiple"' : void 0) + " /><input type=\"submit\" value=\"Upload!\"></div>";
+                    fieldsString += "<input type=\"files\" name=\"" + this.options.paramName + (this.options.uploadMultiple ? "[]" : "") + "\" " + (this.options.uploadMultiple ? 'multiple="multiple"' : void 0) + " /><input type=\"submit\" value=\"Upload!\"></div>";
                     fields = Dropzone.createElement(fieldsString);
                     if (this.element.tagName !== "FORM") {
                         form = Dropzone.createElement("<form action=\"" + this.options.url + "\" enctype=\"multipart/form-data\" method=\"" + this.options.method + "\"></form>");
@@ -1119,7 +1119,7 @@
                             })(this)), 0);
                         }
                     } else {
-                        throw new Error("This file can't be queued because it has already been processed or was rejected.");
+                        throw new Error("This files can't be queued because it has already been processed or was rejected.");
                     }
                 };
 

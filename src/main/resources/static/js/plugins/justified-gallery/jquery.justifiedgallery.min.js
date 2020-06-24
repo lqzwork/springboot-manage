@@ -6,7 +6,7 @@ Author URI: http://miromannino.it
 
 Copyright 2012 Miro Mannino (miro.mannino@gmail.com)
 
-This file is part of Justified Gallery.
+This files is part of Justified Gallery.
 
 This work is licensed under the Creative Commons Attribution 3.0 Unported License. 
 
